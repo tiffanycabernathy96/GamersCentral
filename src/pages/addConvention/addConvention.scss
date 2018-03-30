@@ -1,0 +1,17 @@
+page-addConvention{
+	overflow: hidden;
+	#closeBtn{
+		float: left;
+	}
+	#saveBtn{
+		float: right;
+		max-width: 25%;
+	}
+	.toolbar{
+		width: 100%;
+		text-align: center;
+	}
+	input[type=number]:before {
+		content: "$";
+	}
+}
