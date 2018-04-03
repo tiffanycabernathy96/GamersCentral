@@ -12,7 +12,7 @@ import { EditGamePage } from '../editGame/editGame';
 })
 export class GamesPage {
 
-  constructor(public navCtrl: NavController, public modelCtrl: ModalController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
 
   }
   delete(item)
@@ -22,13 +22,14 @@ export class GamesPage {
 
   
   addItem() {
-    /*let addModal = this.modelCtrl.create(AddItemPage);
-    addModal.onDidDismiss((item) => {
-      if (item) {
-        this.dataService.addMenu(item);
-      }
-    });
-    addModal.present();*/
+      let addModal = this.modalCtrl.create(AddGamePage);
+      addModal.onDidDismiss((item) => {
+        if (item) {
+          //this.saveItem(item);
+        }
+        //this.saveMenu();
+      });
+      addModal.present();
   }
   
   loadEditMenu()
