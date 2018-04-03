@@ -11,7 +11,7 @@ import { EditConventionPage } from '../editConvention/editConvention';
 })
 export class ConventionsPage {
 
-  constructor(public navCtrl: NavController, public modelCtrl: ModalController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
 
   }
   delete(item)
@@ -21,13 +21,13 @@ export class ConventionsPage {
 
   
   addItem() {
-    /*let addModal = this.modelCtrl.create(AddItemPage);
+    let addModal = this.modalCtrl.create(AddConventionPage);
     addModal.onDidDismiss((item) => {
       if (item) {
-        this.dataService.addMenu(item);
+        //this.dataService.addMenu(item);
       }
     });
-    addModal.present();*/
+    addModal.present();
   }
   
   loadEditMenu()
