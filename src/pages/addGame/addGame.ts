@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
+import { Data } from '../../providers/data';
+
 @Component({
   selector: 'page-addGame',
   templateUrl: 'addGame.html'
@@ -14,7 +16,7 @@ export class AddGamePage {
 	tags = [];
 	description;
 	
-  constructor(public navCtrl: NavController, public view: ViewController) {
+  constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
 
   }
 	save() {
@@ -29,6 +31,7 @@ export class AddGamePage {
 		description: this.description
     };
 
+		this.dataService.addGame(newGame);
     this.view.dismiss(newGame);
   }
 

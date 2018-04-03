@@ -116,6 +116,43 @@ export class Data {
 				}
 			});
 		}
+
+		addGame(item)
+		{
+			const Game = Parse.Object.extend('Game');
+			let newGame = new Game();
+			var num=Number (item.price);
+			newGame.set("platforms", item.platforms);
+			newGame.set("admins", item.admins);
+			newGame.set("developer", item.developer);
+			newGame.set("avgRating", item.avgRating);
+			newGame.set("title", item.title);
+			newGame.set("tags", item.tags);
+			newGame.set("description", item.description);
+			newGame.save(null, {
+				success: function(newGame)
+				{
+					
+				},
+				error: function(newGame, error)
+				{
+					alert(error.code+' Failed to Add Item ' + newGame.get("name"));
+				}
+			});
+			let id:string = "";
+			let query = new Parse.Query(Game);
+			query.equalTo("name", item.name);
+			query.first({
+				success: function(data){
+					if(data){
+						this.id = data.id;
+					} else {
+						return null;
+					}
+				}
+			});
+		}
+
 			/*var myconventions = 
 			{
 				name:item.name, 
@@ -143,6 +180,7 @@ export class Data {
 			{
 			  this.drinkItems.push(mymenu);
 			}*/
+
 	/*getOrders()
 	{
 		this.orders = [];
