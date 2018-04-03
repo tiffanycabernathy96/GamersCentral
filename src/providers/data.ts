@@ -9,9 +9,9 @@ export class Data {
 	private parseServerUrl: string= 'https://parseapi.back4app.com/';
 	
 	constructor(public storage: Storage) {
-		/*Parse.initialize(this.parseAppId, this.parseJSKey);
+		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
-		const Menu = Parse.Object.extend('Menu');
+		/*const Menu = Parse.Object.extend('Menu');
 		let query = new Parse.Query(Menu);
 		var selfStart = this;
 		query.limit(1000);
