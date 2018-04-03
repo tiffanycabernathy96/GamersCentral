@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
+import { Data } from '../../providers/data';
+
 @Component({
   selector: 'page-addConvention',
   templateUrl: 'addConvention.html'
@@ -16,9 +18,10 @@ export class AddConventionPage {
 	scheduleUrl;
 	storePageUrl;
 	
-  constructor(public navCtrl: NavController, public view: ViewController) {
+  constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
 
-  }
+	}
+	
 	save() {
 		
     let newConvention = {
@@ -34,6 +37,7 @@ export class AddConventionPage {
 		storePageUrl: this.storePageUrl
     };
 
+		this.dataService.addConvention(newConvention);
     this.view.dismiss(newConvention);
   }
 

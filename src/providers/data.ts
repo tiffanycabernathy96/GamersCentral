@@ -11,6 +11,7 @@ export class Data {
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
+		
 		/*const Menu = Parse.Object.extend('Menu');
 		let query = new Parse.Query(Menu);
 		var selfStart = this;
@@ -76,6 +77,72 @@ export class Data {
 		}
 		);*/
 	}
+
+	addConvention(item)
+		{
+			const Convention = Parse.Object.extend('Convention');
+			let newConvention = new Convention();
+			var num=Number (item.price);
+			newConvention.set("admins", item.admins);
+			newConvention.set("name", item.name);
+			newConvention.set("mapUrl", item.mapUrl);
+			newConvention.set("vendorsUrl", item.vendorsUrl);
+			newConvention.set("bracketsUrl", item.bracketsUrl);
+			newConvention.set("ticketsUrl", item.ticketsUrl);
+			newConvention.set("evenMngr", item.eventMngr);
+			newConvention.set("locationV", item.locationV);
+			newConvention.set("scheduleUrl", item.scheduleUrl);
+			newConvention.set("storePageUrl", item.storePageUrl);
+			newConvention.save(null, {
+				success: function(newConvention)
+				{
+					
+				},
+				error: function(newConvention, error)
+				{
+					alert(error.code+' Failed to Add Item ' + newConvention.get("name"));
+				}
+			});
+			let id:string = "";
+			let query = new Parse.Query(Convention);
+			query.equalTo("name", item.name);
+			query.first({
+				success: function(data){
+					if(data){
+						this.id = data.id;
+					} else {
+						return null;
+					}
+				}
+			});
+		}
+			/*var myconventions = 
+			{
+				name:item.name, 
+				price:num, 
+				category:item.category, 
+				url:item.url, 
+				description:item.description,
+				menuId:id
+			
+			}
+			this.allItems.push(mymenu);
+			if(newMenu.get("category") == "Entree")
+			{
+				this.entreeItems.push(mymenu);
+			}
+			if(newMenu.get("category") == "Side Dish")
+			{
+			  this.sideItems.push(mymenu);
+			}
+			if(newMenu.get("category") == "Dessert")
+			{
+			  this.dessertItems.push(mymenu);
+			}
+			if(newMenu.get("category") == "Drink")
+			{
+			  this.drinkItems.push(mymenu);
+			}*/
 	/*getOrders()
 	{
 		this.orders = [];
@@ -177,67 +244,7 @@ export class Data {
 		});
 		
 	}
-	
-	addMenu(item)
-	{
-		const Menu = Parse.Object.extend('Menu');
-		let newMenu = new Menu();
-		var num=Number (item.price);
-		newMenu.set("name", item.name);
-		newMenu.set("price", num);
-		newMenu.set("category", item.category);
-		newMenu.set("photoUrl", item.url);
-		newMenu.set("description", item.description);
-		newMenu.save(null, {
-			success: function(newMenu)
-			{
-				
-			},
-			error: function(newMenu, error)
-			{
-				alert(error.code+' Failed to Add Item ' + newMenu.get("name"));
-			}
-		});
-		let id:string = "";
-		let query = new Parse.Query(Menu);
-		query.equalTo("name", item.name);
-		query.first({
-			success: function(data){
-				if(data){
-					this.id = data.id;
-				} else {
-					return null;
-				}
-			}
-		});
-		var mymenu = 
-		{
-			name:item.name, 
-			price:num, 
-			category:item.category, 
-			url:item.url, 
-			description:item.description,
-			menuId:id
-		
-		}
-		this.allItems.push(mymenu);
-		if(newMenu.get("category") == "Entree")
-		{
-			this.entreeItems.push(mymenu);
-		}
-		if(newMenu.get("category") == "Side Dish")
-		{
-		  this.sideItems.push(mymenu);
-		}
-		if(newMenu.get("category") == "Dessert")
-		{
-		  this.dessertItems.push(mymenu);
-		}
-		if(newMenu.get("category") == "Drink")
-		{
-		  this.drinkItems.push(mymenu);
-		}
-	}
+
 	getEntreesData()
 	{
 		return this.entreeItems;
