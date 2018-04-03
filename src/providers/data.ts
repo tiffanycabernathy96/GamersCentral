@@ -89,7 +89,7 @@ export class Data {
 			newConvention.set("vendorsUrl", item.vendorsUrl);
 			newConvention.set("bracketsUrl", item.bracketsUrl);
 			newConvention.set("ticketsUrl", item.ticketsUrl);
-			newConvention.set("evenMngr", item.eventMngr);
+			newConvention.set("eventMngr", item.eventMngr);
 			newConvention.set("locationV", item.locationV);
 			newConvention.set("scheduleUrl", item.scheduleUrl);
 			newConvention.set("storePageUrl", item.storePageUrl);
@@ -116,6 +116,40 @@ export class Data {
 				}
 			});
 		}
+
+		getConventionData() {
+			const Convention = Parse.Object.extend('Convention');
+			let query = new Parse.Query(Convention);
+			var items = [];
+			query.limit(1000);
+			query.find().then((conventions) => {
+			  // resolve(menus);
+			  console.log(conventions.length)
+			  for (var i = conventions.length - 1; i >= 0; i--){
+				var myConvention = {
+				  admisn: conventions[i].get("admins"),
+				  name: conventions[i].get("name"),
+				  mapUrl: conventions[i].get("mapUrl"),
+				  vendorsUrl: conventions[i].get("vendorsUrl"),
+				  bracketsUrl: conventions[i].get("bracketUrl"),
+				  ticketsUrl: conventions[i].get("ticketsUrl"),
+				  eventMngr: conventions[i].get("eventMngr"),
+				  locationV: conventions[i].get("locationV"),
+				  scheduleUrl: conventions[i].get("scheduleUrl"),
+				  storePageUrl: conventions[i].get("storePageUrl")
+				}
+				items.push(myConvention);
+			  }
+			  return items;
+		
+			}, (error) => {
+			  //reject(error);
+			  console.log("error");
+			});
+		
+			return items;
+			//return this.storage.get('menuItems');  
+		  }
 
 		addGame(item)
 		{
@@ -213,6 +247,7 @@ export class Data {
 		);
 		return this.orders;
 	}
+
 	deleteAOrder(newOrders, item)
 	{
 		const Order = Parse.Object.extend('Order');

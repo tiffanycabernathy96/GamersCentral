@@ -7,14 +7,30 @@
 
 <ion-content padding >
   <ion-card>
-    <img src="/assets/imgs/logohead.png">
     <ion-card-header>
       Upcoming Conventions
     </ion-card-header>
     <ion-card-content>
-      *Add an upcoming convention
+        <ion-list>
+            <ion-item *ngFor="let item of items">
+              <h2>{{item.name}}</h2>
+              <p>Location: {{item.locationV}}</p>
+              <p>Event Manager: {{item.eventMngr}}</p>
+            </ion-item>
+          </ion-list>
     </ion-card-content>
   </ion-card>
+
+   <!--<ion-card *ngFor="let item of items">
+      <ion-card-content>
+        <ion-card-title>
+          {{item.name}}
+        </ion-card-title>
+        <p><b>{{item.locationV}}</b></p>
+        <p>{{item.eventMngr}}</p>
+        <p>{{item.admins}}</p>
+      </ion-card-content>
+    </ion-card>-->
 
   <ion-card>
     <ion-card-header>

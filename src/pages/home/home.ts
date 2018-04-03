@@ -14,7 +14,10 @@ import { EditConventionPage } from '../editConvention/editConvention';
 })
 export class HomePage {
 
+  public items = [];
+
   constructor(public navCtrl: NavController, public modelCtrl: ModalController, public dataService: Data) {
+    this.items = this.dataService.getConventionData();
 
   }
   delete(item)
@@ -22,7 +25,6 @@ export class HomePage {
 
   }
 
-  
   addItem() {
     /*let addModal = this.modelCtrl.create(AddItemPage);
     addModal.onDidDismiss((item) => {
