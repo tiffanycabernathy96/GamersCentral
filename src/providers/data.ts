@@ -123,11 +123,10 @@ export class Data {
 			var items = [];
 			query.limit(1000);
 			query.find().then((conventions) => {
-			  // resolve(menus);
 			  console.log(conventions.length)
 			  for (var i = conventions.length - 1; i >= 0; i--){
 				var myConvention = {
-				  admisn: conventions[i].get("admins"),
+				  admins: conventions[i].get("admins"),
 				  name: conventions[i].get("name"),
 				  mapUrl: conventions[i].get("mapUrl"),
 				  vendorsUrl: conventions[i].get("vendorsUrl"),
@@ -143,12 +142,10 @@ export class Data {
 			  return items;
 		
 			}, (error) => {
-			  //reject(error);
 			  console.log("error");
 			});
 		
 			return items;
-			//return this.storage.get('menuItems');  
 		  }
 
 		addGame(item)
@@ -186,6 +183,34 @@ export class Data {
 				}
 			});
 		}
+
+		getGameData() {
+			const Game = Parse.Object.extend('Game');
+			let query = new Parse.Query(Game);
+			var items = [];
+			query.limit(1000);
+			query.find().then((games) => {
+			  console.log(games.length)
+			  for (var i = games.length - 1; i >= 0; i--){
+				var myGame = {
+				  platforms: games[i].get("platforms"),
+				  admins: games[i].get("admins"),
+				  developer: games[i].get("developer"),
+				  avgRating: games[i].get("avgRating"),
+				  title: games[i].get("title"),
+				  tags: games[i].get("tags"),
+				  description: games[i].get("description")
+				}
+				items.push(myGame);
+			  }
+			  return items;
+		
+			}, (error) => {
+			  console.log("error");
+			});
+		
+			return items; 
+		  }
 
 			/*var myconventions = 
 			{

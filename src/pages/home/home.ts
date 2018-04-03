@@ -14,10 +14,11 @@ import { EditConventionPage } from '../editConvention/editConvention';
 })
 export class HomePage {
 
-  public items = [];
-
+  public conventions = [];
+  public games = [];
   constructor(public navCtrl: NavController, public modelCtrl: ModalController, public dataService: Data) {
-    this.items = this.dataService.getConventionData();
+    this.conventions = this.dataService.getConventionData();
+    this.games = this.dataService.getGameData();
 
   }
   delete(item)
