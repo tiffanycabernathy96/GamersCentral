@@ -10,12 +10,22 @@
 
 <ion-content padding>
 	<ion-list>
-
 		<ion-item>
 		  <ion-label floating>Convention Name</ion-label>
 		  <ion-input type="text" [(ngModel)]="name"></ion-input>
 		</ion-item>
-
+		
+		<ion-item>
+		  <ion-label floating>Event Manager Name</ion-label>
+		  <ion-input type="text" [(ngModel)]="eventMngr"></ion-input>
+		</ion-item>
+		
+		<ion-item>
+		  <ion-label floating>Location</ion-label>
+		  <ion-input type="text" [(ngModel)]="locationV"></ion-input>
+		  
+		</ion-item>
+		<br>
 		<ion-item>
 		  <ion-label >Map Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="mapUrl" placeholder = "http://"></ion-input>
@@ -37,24 +47,13 @@
 		</ion-item>
 		
 		<ion-item>
-		  <ion-label floating>Event Manager Name</ion-label>
-		  <ion-input type="text" [(ngModel)]="eventMngr"></ion-input>
-		</ion-item>
-		
-		<ion-item>
 		  <ion-label >Schedule Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="scheduleUrl" placeholder = "http://"></ion-input>
-		</ion-item>
-		
-		<ion-item>
-		  <ion-label floating>Location</ion-label>
-		  <ion-input type="text" [(ngModel)]="locationV"></ion-input>
 		</ion-item>
 		
 		<ion-item>
 		  <ion-label >Store Page Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="storePageUrl" placeholder = "http://"></ion-input>
 		</ion-item>
-		
 	</ion-list>
   </ion-content>

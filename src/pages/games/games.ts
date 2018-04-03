@@ -21,7 +21,7 @@ export class GamesPage {
   }
 
   
-  addItem() {
+  addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
         if (item) {
@@ -50,8 +50,8 @@ export class GamesPage {
   }
   viewItem(item)
   {
-	  /*this.navCtrl.push(ItemDetailPage, 
-	  {item: item});*/
+	  this.navCtrl.push(GameDetailPage, 
+	  {item: item});
   }
   
 }

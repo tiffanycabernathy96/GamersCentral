@@ -20,7 +20,7 @@ export class ConventionsPage {
   }
 
   
-  addItem() {
+  addConvention() {
     let addModal = this.modalCtrl.create(AddConventionPage);
     addModal.onDidDismiss((item) => {
       if (item) {
@@ -48,8 +48,8 @@ export class ConventionsPage {
   }
   viewItem(item)
   {
-	  /*this.navCtrl.push(ItemDetailPage, 
-	  {item: item});*/
+	  this.navCtrl.push(ConventionDetailPage, 
+	  {item: item});
   }
   
 }
