@@ -82,7 +82,7 @@ export class Data {
 		{
 			const Convention = Parse.Object.extend('Convention');
 			let newConvention = new Convention();
-			var num=Number (item.price);
+			//var num=Number (item.price);
 			newConvention.set("admins", item.admins);
 			newConvention.set("name", item.name);
 			newConvention.set("mapUrl", item.mapUrl);
@@ -152,7 +152,7 @@ export class Data {
 		{
 			const Game = Parse.Object.extend('Game');
 			let newGame = new Game();
-			var num=Number (item.price);
+			//var num=Number (item.price);
 			newGame.set("platforms", item.platforms);
 			newGame.set("admins", item.admins);
 			newGame.set("developer", item.developer);

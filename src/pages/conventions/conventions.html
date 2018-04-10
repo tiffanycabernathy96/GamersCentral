@@ -9,6 +9,21 @@
 </ion-header>
 
 <ion-content padding class="content"> 
-	
+  <ion-card>
+      <ion-card-header style="color: #ffffff">
+        Upcoming Conventions
+      </ion-card-header>
+      <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of allConventions">
+              <h2 style="color: #ffffff">{{item.name}}</h2>
+              <p>Location: {{item.locationV}}</p>
+              <p>Event Manager: {{item.eventMngr}}</p>
+            </ion-item> 
+          </ion-list>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>
+
+

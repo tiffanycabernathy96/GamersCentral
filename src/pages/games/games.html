@@ -9,6 +9,19 @@
 </ion-header>
 
 <ion-content padding class="content">
-	
+  <ion-card>
+    <ion-card-header style="color: #ffffff">
+      Suggested Games
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of allGames">
+          <h2 style="color: #ffffff">{{item.title}}</h2>
+          <p>Developer: {{item.developer}}</p>
+          <p>Description: {{item.description}}</p>
+        </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>

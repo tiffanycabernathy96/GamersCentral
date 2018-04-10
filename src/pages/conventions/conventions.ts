@@ -4,6 +4,7 @@ import { AddConventionPage } from '../addConvention/addConvention';
 import { Data } from '../../providers/data';
 import { ConventionDetailPage } from '../conventionDetail/conventionDetail';
 import { EditConventionPage } from '../editConvention/editConvention';
+
 @Component({
   selector: 'page-conventions',
   templateUrl: 'conventions.html',
@@ -11,13 +12,17 @@ import { EditConventionPage } from '../editConvention/editConvention';
 })
 export class ConventionsPage {
 
+  public allConventions = [];
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
+    this.allConventions = this.dataService.getConventionData();
 
   }
   delete(item)
   {
 
   }
+
 
   
   addConvention() {

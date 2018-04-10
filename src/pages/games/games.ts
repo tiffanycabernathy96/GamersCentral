@@ -12,8 +12,9 @@ import { EditGamePage } from '../editGame/editGame';
 })
 export class GamesPage {
 
+  public allGames = [];
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
-
+    this.allGames = this.dataService.getGameData();
   }
   delete(item)
   {
@@ -21,6 +22,10 @@ export class GamesPage {
   }
 
   
+  ionViewWillEnter()
+  {
+
+  }
   addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
@@ -44,10 +49,7 @@ export class GamesPage {
     });
     addModal.present();*/
   }
-  ionViewWillEnter()
-  {
-	  
-  }
+
   viewItem(item)
   {
 	  this.navCtrl.push(GameDetailPage, 
