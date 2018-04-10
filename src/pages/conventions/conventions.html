@@ -16,13 +16,13 @@
       <ion-card-content>
           <ion-list>
             <ion-item-sliding *ngFor="let item of allConventions">
-              <ion-item>
+              <ion-item (click)="viewItem(item)">
                   <h2 style="color: #ffffff">{{item.name}}</h2>
                   <p>Location: {{item.locationV}}</p>
                   <p>Event Manager: {{item.eventMngr}}</p>
                 </ion-item>
                   <ion-item-options side="right">
-                      <button ion-button color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
+                      <button ion-button (click)="loadEditConvention()" color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
                       <button ion-button color="danger"><ion-icon name="trash"></ion-icon>Delete</button>
                   </ion-item-options>
             </ion-item-sliding> 

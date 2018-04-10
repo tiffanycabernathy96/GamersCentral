@@ -37,8 +37,11 @@ export class GamesPage {
       addModal.present();
   }
   
-  loadEditMenu()
+  loadEditGame()
   {
+    let addModal = this.modalCtrl.create(EditGamePage);
+    addModal.present();
+
 	/*let addModal = this.modelCtrl.create(EditMenuPage);
 
     addModal.onDidDismiss( ()=> {
@@ -48,6 +51,16 @@ export class GamesPage {
 		this.drinkItems = this.dataService.getDrinksData();
     });
     addModal.present();*/
+
+    /*
+    newGame.set("platforms", item.platforms);
+			newGame.set("admins", item.admins);
+			newGame.set("developer", item.developer);
+			newGame.set("avgRating", item.avgRating);
+			newGame.set("title", item.title);
+			newGame.set("tags", item.tags);
+			newGame.set("description", item.description);
+    */
   }
 
   viewItem(item)

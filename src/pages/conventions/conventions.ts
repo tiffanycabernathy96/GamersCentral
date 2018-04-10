@@ -35,8 +35,11 @@ export class ConventionsPage {
     addModal.present();
   }
   
-  loadEditMenu()
+  loadEditConvention()
   {
+    let addModal = this.modalCtrl.create(EditConventionPage);
+    addModal.present();
+
 	/*let addModal = this.modelCtrl.create(EditMenuPage);
 
     addModal.onDidDismiss( ()=> {
