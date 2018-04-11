@@ -1,0 +1,47 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Account</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="editProfile()"><ion-icon name="create"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="content">
+	<div class="img">
+		<img src={{picture}} *ngIf="picture"/>
+	</div>
+	<div class="info">
+	<div class="username">
+		<h5>Username:</h5> 
+		<p>{{username}}</p>
+	</div>
+	<div class="email">
+		<h5>Email:</h5> 
+		<p>{{email}}</p>
+	</div>
+	<div class="socialMedia">
+		<h5>Facebook:</h5>
+		<p>https://www.facebook.com/{{facebook}}</p>
+		<h5>Instagram:</h5>
+		<p>@{{instagram}}</p>
+		<h5>Twitter:</h5> 
+		<p>http://www.twitter.com/{{twitter}}</p>
+	</div>
+	<div class="genres">
+		<h5>Genres:</h5>
+		<ul>
+			<li *ngFor="let likedGenre of likedGenres">{{likedGenre}}</li>
+		</ul>
+	</div>
+	<div class="platforms">
+		<h5>Owned Platforms:</h5>
+		<ul>
+			<li *ngFor="let platform of platforms">
+			{{platform}}
+			</li>
+		</ul>
+	</div>
+	</div>
+</ion-content>

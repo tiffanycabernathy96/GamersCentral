@@ -7,7 +7,7 @@ export class Data {
 	private parseAppId: string = 'pjhBBiUR9zhM4yVyvzJ4VZqEVdwtIsJOoKZlU6BJ';
 	private parseJSKey: string = 'jyIut17JVHHJFTlOVPqqTdhlQ00GUd6tBpOLYrbZ';
 	private parseServerUrl: string= 'https://parseapi.back4app.com/';
-	
+	public currentUser;
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
@@ -77,7 +77,51 @@ export class Data {
 		}
 		);*/
 	}
-
+	setCurrentUser(user)
+	{
+		if(user){
+			this.currentUser = user;
+		}
+	}
+	getCurrentUser()
+	{
+		return this.currentUser;
+	}
+	saveProfile(newInfo)
+	{
+		const User = Parse.Object.extend('User');
+		let userInfo = new Parse.Query(User);
+		userInfo.equalTo("objectId", newInfo.id);
+		userInfo.first({
+			success: function(user){
+				if(user){
+					user.set('username', newInfo.username);
+					user.set('password', newInfo.password);
+					user.set('email', newInfo.email);
+					user.set('facebook', newInfo.facebook);
+					user.set('instagram', newInfo.instagram);
+					user.set('twitter', newInfo.twitter);
+					user.set('picture', newInfo.picture);
+					user.set('likedGenres', newInfo.likedGenres);
+					user.set('platforms', newInfo.platforms);
+					user.save(null, {
+						success: function(newProfile)
+						{
+							console.log("Saved");
+						},
+						error: function(response, error)
+						{
+							alert(error.code+' Failed to Save Profile ' + error.message);
+						}
+					});
+				}
+			},
+			error: function(error){
+				console.log("Error: " + error.code);
+			}
+		}
+		);
+	}
 	addConvention(item)
 		{
 			const Convention = Parse.Object.extend('Convention');

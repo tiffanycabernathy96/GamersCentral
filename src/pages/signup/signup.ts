@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Parse } from 'parse';
-
+import { Camera, CameraOptions } from '@ionic-native/camera';
 // Pages
 import { TabsPage } from '../tabs/tabs';
 
@@ -15,13 +15,30 @@ export class SignupPage {
   username: string = '';
   verify: string = '';
   email: string = '';
-
-  constructor(public navCtrl: NavController, private loadCtrl: LoadingController) { }
+  platforms = [];
+  likedGenres =[];
+	picture="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
+  constructor(public navCtrl: NavController, private loadCtrl: LoadingController, private camera: Camera) { }
 
   ionViewDidLoad() {
     console.log('Initiate Signup');
   }
-
+options: CameraOptions = {
+	  quality: 100, 
+	  destinationType: this.camera.DestinationType.DATA_URL, 
+	  encodingType: this.camera.EncodingType.JPEG,
+	  mediaType: this.camera.MediaType.PICTURE
+  }
+  takePicture(){
+	  this.camera.getPicture(this.options).then(
+      (imagePath) => {
+		  this.picture = 'data:image/jpeg;base64,' + imagePath;
+      },
+      (err) => {
+        alert("Error Uploading Image"); 
+      }
+    );
+  }
   public doRegister() {
     var user = new Parse.User();
 	console.log(this.password + " " + this.confirm);
@@ -34,6 +51,9 @@ export class SignupPage {
       user.set("username", this.username);
       user.set("password", this.password);
       user.set("email", this.email);
+	  user.set("platforms",this.platforms);
+	  user.set("likedGenres",this.likedGenres);
+	  user.set("picture",this.picture);
 		var self = this;
       user.signUp(null, {
         success: function(user) {
