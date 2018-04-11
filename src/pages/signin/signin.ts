@@ -18,7 +18,7 @@ export class SigninPage {
   password: string = '';
   username: string = '';
 
-  constructor(public navCtrl: NavController, data:Data, private loadCtrl: LoadingController) { }
+  constructor(public navCtrl: NavController, public data:Data, private loadCtrl: LoadingController) { }
 
   ionViewDidLoad() {
     console.log('Initiated Signin');
@@ -33,8 +33,9 @@ export class SigninPage {
 	Parse.User.logIn(this.username, this.password, 
 	{
 		success: function(user)
-		{
+		{	
 			self.navCtrl.setRoot(TabsPage);
+			self.data.setCurrentUser(user);
 			loader.dismissAll();
 		},
 		error: function(user, error)

@@ -31,13 +31,13 @@
 	</div>
 	<div class="genres">
 		<h5>Genres:</h5>
-		<ul>
+		<ul ng-if="genres">
 			<li *ngFor="let likedGenre of likedGenres">{{likedGenre}}</li>
 		</ul>
 	</div>
 	<div class="platforms">
 		<h5>Owned Platforms:</h5>
-		<ul>
+		<ul ng-if="platforms">
 			<li *ngFor="let platform of platforms">
 			{{platform}}
 			</li>
