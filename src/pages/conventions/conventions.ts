@@ -29,6 +29,7 @@ export class ConventionsPage {
     let addModal = this.modalCtrl.create(AddConventionPage);
     addModal.onDidDismiss((item) => {
       if (item) {
+		  this.allConventions = this.dataService.getConventionData();
         //this.dataService.addMenu(item);
       }
     });

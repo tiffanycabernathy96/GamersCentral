@@ -30,7 +30,8 @@ export class GamesPage {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
         if (item) {
-          //this.saveItem(item);
+          this.allGames = this.dataService.getGameData();
+		  //this.saveItem(item);
         }
         //this.saveMenu();
       });
