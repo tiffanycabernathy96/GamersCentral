@@ -31,6 +31,16 @@
 		</ion-item>
 		
 		<ion-item>
+			<ion-label stacked>Location City,State</ion-label>
+			<ion-input type="text" [(ngModel)]="locationCityState" placeholder="Ex. Atlanta, GA"></ion-input>
+		</ion-item>	
+		
+		<ion-item>
+			<ion-label stacked>ZipCode</ion-label>
+			<ion-input type="number" [(ngModel)]="zipcode" ></ion-input>
+		</ion-item>
+		
+		<ion-item>
 		  <ion-label stacked>Owned Platforms</ion-label>
 		  <ion-select type="text" multiple="true" [(ngModel)]="platforms">
 				<ion-option value="Playstation 4">Playstation 4</ion-option>

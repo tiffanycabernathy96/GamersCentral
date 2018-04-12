@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>My Conventions</ion-title>
+    <ion-title>Conventions</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addConvention()"><ion-icon name="add-circle"></ion-icon></button>
     </ion-buttons>
@@ -18,7 +18,7 @@
             <ion-item-sliding *ngFor="let item of allConventions">
               <ion-item (click)="viewItem(item)">
                   <h2 style="color: #ffffff">{{item.name}}</h2>
-                  <p>Location: {{item.locationV}}</p>
+                  <p>Location: {{item.locationCityState}}, {{item.zipcode}}</p>
                   <p>Main Page: {{item.mainPage}}</p>
                 </ion-item>
                   <ion-item-options side="right">

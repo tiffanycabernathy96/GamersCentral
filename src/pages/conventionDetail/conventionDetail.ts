@@ -20,6 +20,8 @@ export class ConventionDetailPage {
 	storePageUrl;
 	description;
 	faq;
+	locationCityState;
+	zipcode;
   constructor(public navCtrl: NavController,public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
 	
   }
@@ -37,6 +39,7 @@ export class ConventionDetailPage {
 		this.storePageUrl = this.navParams.get('item').storePageUrl;
 		this.description = this.navParams.get('item').description;
 		this.faq = this.navParams.get('item').faq;
-
+		this.locationCityState = this.navParams.get('item').locationCityState;
+		this.zipcode = this.navParams.get('item').zipcode;
 	}
 }

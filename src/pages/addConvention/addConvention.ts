@@ -19,6 +19,8 @@ export class AddConventionPage {
 	storePageUrl;
 	description;
 	faq;
+	locationCityState;
+	zipcode;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
 
@@ -38,7 +40,9 @@ export class AddConventionPage {
 		scheduleUrl: this.scheduleUrl, 
 		storePageUrl: this.storePageUrl,
 		description: this.description,
-		faq: this.faq
+		faq: this.faq,
+		locationCityState: this.locationCityState,
+		zipcode: this.zipcode
     };
 
 		this.dataService.addConvention(newConvention);

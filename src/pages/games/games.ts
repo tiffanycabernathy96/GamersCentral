@@ -20,12 +20,6 @@ export class GamesPage {
   {
 
   }
-
-  
-  ionViewWillEnter()
-  {
-
-  }
   addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
@@ -37,9 +31,7 @@ export class GamesPage {
   }
   
   loadEditGame(item)
-  {
-	  
-	  
+  {  
     let addModal = this.modalCtrl.create(EditGamePage, {item: item});
 	addModal.onDidDismiss( ()=> {
 		this.allGames = this.dataService.getGameData();

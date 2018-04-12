@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{name}}</ion-title>
+    <ion-title><h1>{{name}}</h1></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,6 +16,7 @@
 		<button  color="danger"><a href={{bracketsUrl}}>Contests</a></button>
 		<button  color="danger"><a href={{faq}}>FAQ</a></button>
 	</div>
+	<h3>Location: {{locationCityState}}, {{zipcode}}</h3>
 	<div id="map">
 	<iframe [src]="locationV" width="100%" height="350" frameborder="0" style="border:0"></iframe>
 	</div>

@@ -11,13 +11,13 @@
 <ion-list ng-if="convSearchResults.length>0||gameSearchResults.length>0" style="background-color: #a50000">
         <ion-item *ngFor="let item of convSearchResults" (click)="viewConventionItem(item)">
 			<h2 style="color: #ffffff">{{item.name}}</h2>
-			<p>Location: {{item.locationV}}</p>
+			<p>Location: {{item.locationCityState}}, {{item.zipcode}}</p>
 			<p>Main Page: {{item.mainPage}}</p>
         </ion-item>
 		<ion-item *ngFor="let item of gameSearchResults" (click)="viewGameItem(item)">
             <h2 style="color: #ffffff">{{item.title}}</h2>
             <p>Developer: {{item.developer}}</p>
-            <p>Description: {{item.description}}</p>
+            <p>Game Page URL: {{item.gamePageUrl}}</p>
         </ion-item>
     </ion-list>
   <ion-card>
@@ -28,7 +28,7 @@
         <ion-list>
             <ion-item *ngFor="let item of conventions" (click)="viewConventionItem(item)">
 				<h2 style="color: #ffffff">{{item.name}}</h2>
-				<p>Location: {{item.locationV}}</p>
+				<p>Location: {{item.locationCityState}}, {{item.zipcode}}</p>
 				<p>Main Page: {{item.mainPage}}</p>
             </ion-item>
           </ion-list>
@@ -44,7 +44,7 @@
             <ion-item *ngFor="let item of games" (click)="viewGameItem(item)">
               <h2 style="color: #ffffff">{{item.title}}</h2>
               <p>Developer: {{item.developer}}</p>
-              <p>Description: {{item.description}}</p>
+              <p>Game Page URL: {{item.gamePageUrl}}</p>
             </ion-item>
           </ion-list>
     </ion-card-content>

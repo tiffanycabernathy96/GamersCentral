@@ -20,6 +20,8 @@ export class ProfilePage {
 	likedGenres =[];
 	combinedGenres:string;
 	platforms = [];
+	locationCityState;
+	zipcode;
 	combinedPlatforms:string;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
 	this.user = this.dataService.getCurrentUser();
@@ -32,7 +34,8 @@ export class ProfilePage {
 	this.picture = this.user.attributes.picture;
 	this.likedGenres = this.user.attributes.likedGenres;
 	this.platforms = this.user.attributes.platforms;
-	
+	this.locationCityState = this.user.attributes.locationCityState;
+	this.zipcode = this.user.attributes.zipcode;
   }
   editProfile() {
 	  let addModal = this.modalCtrl.create(EditProfilePage);
@@ -48,6 +51,8 @@ export class ProfilePage {
 		this.picture = this.user.attributes.picture;
 		this.likedGenres = this.user.attributes.likedGenres;
 		this.platforms = this.user.attributes.platforms;
+		this.locationCityState = this.user.attributes.locationCityState;
+		this.zipcode = this.user.attributes.zipcode;
     });
     addModal.present();
 

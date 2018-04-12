@@ -15,6 +15,9 @@ export class AddGamePage {
 	title;
 	tags = [];
 	description;
+	steamEmbed;
+	gamePageUrl;
+	youtubeEmbed;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
 
@@ -28,7 +31,10 @@ export class AddGamePage {
 		avgRating: this.avgRating,
 		title: this.title,
 		tags: this.tags,
-		description: this.description
+		description: this.description,
+		steamEmbed: this.steamEmbed,
+		gamePageUrl: this.gamePageUrl,
+		youtubeEmbed: this.youtubeEmbed
     };
 
 		this.dataService.addGame(newGame);

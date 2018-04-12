@@ -39,6 +39,8 @@ export class Data {
 					user.set('picture', newInfo.picture);
 					user.set('likedGenres', newInfo.likedGenres);
 					user.set('platforms', newInfo.platforms);
+					user.set('locationCityState', newInfo.locationCityState);
+					user.set('zipcode', newInfo.zipcode);
 					user.save(null, {
 						success: function(newProfile)
 						{
@@ -72,6 +74,8 @@ export class Data {
 		newConvention.set("scheduleUrl", item.scheduleUrl);
 		newConvention.set("storePageUrl", item.storePageUrl);
 		newConvention.set("Description", item.description);
+		newConvention.set("locationCityState", item.locationCityState);
+		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.save(null, {
 			success: function(newConvention)
@@ -118,6 +122,8 @@ export class Data {
 				scheduleUrl: conventions[i].get("scheduleUrl"),
 				storePageUrl: conventions[i].get("storePageUrl"),
 				description: conventions[i].get("Description"),
+				locationCityState: conventions[i].get("locationCityState"),
+				zipcode: conventions[i].get("zipcode"),
 				faq: conventions[i].get("FaQ")
 			}
 			items.push(myConvention);
@@ -140,9 +146,11 @@ export class Data {
 		newGame.set("developer", item.developer);
 		newGame.set("avgRating", item.avgRating);
 		newGame.set("title", item.title);
+		newGame.set("steamEmbed", item.steamEmbed);
 		newGame.set("tags", item.tags);
 		newGame.set("description", item.description);
 		newGame.set("gamePageUrl", item.gamePageUrl);
+		newGame.set("youtubeEmbed", item.youtubeEmbed)
 		newGame.save(null, {
 			success: function(newGame)
 			{
@@ -180,10 +188,12 @@ export class Data {
 				admins: games[i].get("admins"),
 				developer: games[i].get("developer"),
 				avgRating: games[i].get("avgRating"),
+				steamEmbed: games[i].get("steamEmbed"),
 				title: games[i].get("title"),
 				tags: games[i].get("tags"),
 				description: games[i].get("description"),
-				gamePageUrl: games[i].get("gamePageUrl")
+				gamePageUrl: games[i].get("gamePageUrl"),
+				youtubeEmbed: games[i].get("youtubeEmbed")
 			}
 			items.push(myGame);
 		  }
@@ -214,6 +224,8 @@ export class Data {
 					theConvention.set('storePageUrl', newInfo.storePageUrl);
 					theConvention.set('Description', newInfo.description);
 					theConvention.set('FaQ', newInfo.faq);
+					theConvention.set('locationCityState', newInfo.loationCityState);
+					theConvention.set('zipcode', newInfo.zipcode);
 					theConvention.save(null, {
 						success: function(newConventionCreated)
 						{
@@ -244,8 +256,10 @@ export class Data {
 					newGame.set('password', newInfo.developer);
 					newGame.set('email', newInfo.title);
 					newGame.set('facebook', newInfo.tags);
+					newGame.set('steamEmbed', newInfo.steamEmbed);
 					newGame.set('instagram', newInfo.description);
 					newGame.set('gamePageUrl', newInfo.gamePageUrl);
+					newGame.set('youtubeEmbed', newInfo.youtubeEmbed);
 					newGame.save(null, {
 						success: function(newGame)
 						{

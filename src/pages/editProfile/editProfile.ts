@@ -19,7 +19,8 @@ export class EditProfilePage {
 	picture: string;
 	likedGenres =[];
 	platforms = [];
-	newPicture;
+	locationCityState;
+	zipcode;
 	
   constructor(public view: ViewController, public dataService: Data, private camera: Camera) {
 	this.user = this.dataService.getCurrentUser();
@@ -33,6 +34,8 @@ export class EditProfilePage {
 	this.picture = this.user.attributes.picture;
 	this.likedGenres = this.user.attributes.likedGenres;
 	this.platforms = this.user.attributes.platforms;
+	this.locationCityState = this.user.attributes.locationCityState;
+	this.zipcode = this.user.attributes.zipcode;
   }
   options: CameraOptions = {
 	  quality: 100, 
@@ -61,7 +64,9 @@ export class EditProfilePage {
 		instagram: this.instagram,
 		picture: this.picture,
 		likedGenres: this.likedGenres,
-		platforms: this.platforms
+		platforms: this.platforms,
+		locationCityState: this.locationCityState,
+		zipcode: this.zipcode
     };
 		this.dataService.saveProfile(newProfile);
 		this.view.dismiss();

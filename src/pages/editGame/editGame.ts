@@ -15,6 +15,9 @@ export class EditGamePage {
 	tags = [];
 	description;
 	gamePageUrl;
+	steamEmbed;
+	youtubeEmbed;
+	
   constructor(public params: NavParams, public view: ViewController, public dataService: Data) {
 	this.id = params.get('item').id;
 	this.platforms = params.get('item').platforms;
@@ -23,6 +26,8 @@ export class EditGamePage {
 	this.tags = params.get('item').tags;
 	this.description = params.get('item').description;
 	this.gamePageUrl = params.get('item').gamePageUrl;
+	this.steamEmbed = params.get('item').steamEmbed;
+	this.youtubeEmbed = params.get('item').youtubeEmbed;
   }
 	ionViewWillEnter()
 	{
@@ -37,7 +42,9 @@ export class EditGamePage {
 			title: this.title,
 			tags: this.tags,
 			description: this.description,
-			gamePageUrl: this.gamePageUrl
+			gamePageUrl: this.gamePageUrl,
+			steamEmbed: this.steamEmbed,
+			youtubeEmbed: this.youtubeEmbed
     };
 		this.dataService.saveGame(newGame);
 		this.view.dismiss();

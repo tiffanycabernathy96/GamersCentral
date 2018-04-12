@@ -21,6 +21,8 @@ export class EditConventionPage {
 	storePageUrl;
 	description;
 	faq;
+	locationCityState;
+	zipcode;
   constructor(public params: NavParams, public view: ViewController, public dataService: Data) {
 	this.id = params.get('item').id;
 	this.name = params.get('item').name;
@@ -34,6 +36,8 @@ export class EditConventionPage {
 	this.storePageUrl = params.get('item').storePageUrl;
 	this.description = params.get('item').description;
 	this.faq = params.get('item').faq;
+	this.locationCityState = params.get('item').locationCityState;
+	this.zipcode = params.get('item').zipcode;
   }
 	ionViewWillEnter()
 	{
@@ -56,7 +60,9 @@ export class EditConventionPage {
 			scheduleUrl: this.scheduleUrl,
 			storePageUrl: this.storePageUrl,
 			description: this.description,
-			faq: this.faq
+			faq: this.faq,
+			locationCityState: this.locationCityState,
+			zipcode: this.zipcode
     };
 		this.dataService.saveConvention(newConvention);
 		this.view.dismiss();

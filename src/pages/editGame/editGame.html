@@ -23,7 +23,14 @@
 			<ion-label >Game Page Url</ion-label>
 			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="gamePageUrl" placeholder = "http://"></ion-input>
 		</ion-item>
-			
+		<ion-item>
+			<ion-label >Steam Embed Url</ion-label>
+			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="steamEmbed" placeholder = "http://"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label >Youtube Embed Url</ion-label>
+			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="youtubeEmbed" placeholder = "http://"></ion-input>
+		</ion-item>
 			<ion-item>
 				<ion-label floating>Game Platform</ion-label>
 				<ion-select type="text" required multiple="true" [(ngModel)]="platforms">

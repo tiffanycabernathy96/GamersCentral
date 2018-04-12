@@ -15,12 +15,20 @@
 		  <ion-input type="text" [(ngModel)]="name"></ion-input>
 		</ion-item>		
 		<ion-item>
+			<ion-label stacked>Convention Location City,State</ion-label>
+			<ion-input type="text" [(ngModel)]="locationCityState" placeholder="Ex. Atlanta, GA"></ion-input>
+		</ion-item>	
+		<ion-item>
+			<ion-label stacked>ZipCode</ion-label>
+			<ion-input type="number" [(ngModel)]="zipcode" ></ion-input>
+		</ion-item>	
+		<ion-item>
 		  <ion-label stacked>Description</ion-label>
 		  <ion-textarea type="text" [(ngModel)]="description" placeholder = "Description"></ion-textarea>
 		</ion-item>
 		<br>
 		<ion-item>
-		  <ion-label >Location</ion-label>
+		  <ion-label >Location Map Embed</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="locationV" placeholder = "http://"></ion-input>
 		  <ion-icon name="help" item-right (click)="alertHelp()" style="margin:0px;"></ion-icon>
 		</ion-item>

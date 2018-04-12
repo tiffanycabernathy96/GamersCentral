@@ -17,6 +17,8 @@ export class SignupPage {
   email: string = '';
   platforms = [];
   likedGenres =[];
+  zipcode;
+  locationCityState;
 	picture="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
   constructor(public navCtrl: NavController, private loadCtrl: LoadingController, private camera: Camera) { }
 
@@ -54,6 +56,8 @@ options: CameraOptions = {
 	  user.set("platforms",this.platforms);
 	  user.set("likedGenres",this.likedGenres);
 	  user.set("picture",this.picture);
+	  user.set("locationCityState", this.locationCityState);
+	  user.set("zipcode", this.zipcode);
 		var self = this;
       user.signUp(null, {
         success: function(user) {
