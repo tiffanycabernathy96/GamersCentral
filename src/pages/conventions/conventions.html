@@ -19,10 +19,10 @@
               <ion-item (click)="viewItem(item)">
                   <h2 style="color: #ffffff">{{item.name}}</h2>
                   <p>Location: {{item.locationV}}</p>
-                  <p>Event Manager: {{item.eventMngr}}</p>
+                  <p>Main Page: {{item.mainPage}}</p>
                 </ion-item>
                   <ion-item-options side="right">
-                      <button ion-button (click)="loadEditConvention()" color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
+                      <button ion-button (click)="loadEditConvention(item)" color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
                       <button ion-button color="danger"><ion-icon name="trash"></ion-icon>Delete</button>
                   </ion-item-options>
             </ion-item-sliding> 

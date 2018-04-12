@@ -1,13 +1,43 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Game Detail</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-	<ion-card-content>
+
 		
-	</ion-card-content>
-  </ion-card>
+		<div>
+			<h3>Avg. Rating:</h3> <p style="color:white;">{{avgRating}}%</p>
+		</div>
+		
+		<div>
+			<h3>Developer Name:</h3> <p style="color:white;">{{developer}}</p>
+		</div>
+		
+		
+		<div id="bottom">
+			<h3>Platforms</h3>
+			<ul ng-if="platforms">
+				<li *ngFor="let platform of platforms">
+				{{platform}}
+				</li>
+			</ul>
+			
+			<h3>Tags</h3>
+			<ul ng-if="tags">
+				<li *ngFor="let tag of tags">
+				{{tag}}
+				</li>
+			</ul>
+		</div>
+		
+		<div id="description">
+			<h3 style="text-align:center;">Description</h3>
+			<p style="color:white; text-align:center;">{{description}}</p>
+		</div>
+		
+		<button ng-if="gamePageUrl != undefined" ion-button color="danger" id="gamePage"><a href={{gamePageUrl}}>Game Page Url</a></button>
+		<button ion-button color="danger" id="rateGame" (click)="rate()">Rate Game</button>
+
 </ion-content>

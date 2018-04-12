@@ -72,10 +72,16 @@ onInput(event)
   {
 	  
   }
-  viewItem(item)
+  viewConventionItem(item)
   {
-	  /*this.navCtrl.push(ItemDetailPage, 
-	  {item: item});*/
+	  console.log("stop");
+	  this.navCtrl.push(ConventionDetailPage, 
+	  {item: item});
+  }
+  viewGameItem(item)
+  {
+	  this.navCtrl.push(GameDetailPage, 
+	  {item: item});
   }
   
 }

@@ -9,12 +9,12 @@
 <ion-content padding class= "content">
 <ion-searchbar [(ngModel)]="searchInput" [showCancelButton]="shouldShowCancel" [animated]="true" (ionInput)="onInput($event)" ></ion-searchbar>
 <ion-list ng-if="convSearchResults.length>0||gameSearchResults.length>0" style="background-color: #a50000">
-        <ion-item *ngFor="let item of convSearchResults">
-            <h2 style="color: #ffffff">{{item.name}}</h2>
-            <p>Location: {{item.locationV}}</p>
-            <p>Event Manager: {{item.eventMngr}}</p>
+        <ion-item *ngFor="let item of convSearchResults" (click)="viewConventionItem(item)">
+			<h2 style="color: #ffffff">{{item.name}}</h2>
+			<p>Location: {{item.locationV}}</p>
+			<p>Main Page: {{item.mainPage}}</p>
         </ion-item>
-		<ion-item *ngFor="let item of gameSearchResults">
+		<ion-item *ngFor="let item of gameSearchResults" (click)="viewGameItem(item)">
             <h2 style="color: #ffffff">{{item.title}}</h2>
             <p>Developer: {{item.developer}}</p>
             <p>Description: {{item.description}}</p>
@@ -26,10 +26,10 @@
     </ion-card-header>
     <ion-card-content>
         <ion-list>
-            <ion-item *ngFor="let item of conventions">
-              <h2 style="color: #ffffff">{{item.name}}</h2>
-              <p>Location: {{item.locationV}}</p>
-              <p>Event Manager: {{item.eventMngr}}</p>
+            <ion-item *ngFor="let item of conventions" (click)="viewConventionItem(item)">
+				<h2 style="color: #ffffff">{{item.name}}</h2>
+				<p>Location: {{item.locationV}}</p>
+				<p>Main Page: {{item.mainPage}}</p>
             </ion-item>
           </ion-list>
     </ion-card-content>
@@ -41,7 +41,7 @@
     </ion-card-header>
     <ion-card-content>
         <ion-list>
-            <ion-item *ngFor="let item of games">
+            <ion-item *ngFor="let item of games" (click)="viewGameItem(item)">
               <h2 style="color: #ffffff">{{item.title}}</h2>
               <p>Developer: {{item.developer}}</p>
               <p>Description: {{item.description}}</p>

@@ -1,21 +1,33 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Convention Detail</ion-title>
+    <ion-title>{{name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
+	<div id="topBtns">
+		<button  color="danger"><a href={{vendorsUrl}}>Vendors</a></button>
+		<button  color="danger"><a href={{scheduleUrl}}>Schedule</a></button>
+		<button  color="danger"><a href={{mainPage}}>Main Page</a></button>
+	</div>
+	<div id="bottomBtns">
+		<button  color="danger"><a href={{storePageUrl}}>Store Page</a></button>
+		<button  color="danger"><a href={{bracketsUrl}}>Contests</a></button>
+		<button  color="danger"><a href={{faq}}>FAQ</a></button>
+	</div>
+	<div id="map">
+	<iframe [src]="locationV" width="100%" height="350" frameborder="0" style="border:0"></iframe>
+	</div>
+	<button ion-button color="danger" id="tickets"><a href={{ticketsUrl}}>But Tickets Now!</a></button>
+	<div id="socialMedia">
+		<button ion-button icon-only color="danger"><ion-icon name="logo-facebook"></ion-icon> </button>
+		<button ion-button icon-only color="danger"><ion-icon name="logo-instagram"></ion-icon></button>
+		<button ion-button icon-only color="danger"><ion-icon name="logo-twitter"></ion-icon></button>
+	</div>
   <ion-card>
-    <ion-card-content>
-      <p style="color: #ffffff">Convention Name: {{name}}</p>
-      <p style="color: #ffffff">Map: {{mapUrl}}</p>
-      <p style="color: #ffffff">Vendors: {{vendorsUrl}}</p>
-      <p style="color: #ffffff">Brackets: {{bracketsUrl}}</p>
-      <p style="color: #ffffff">Tickets: {{ticketsUrl}}</p>
-      <p style="color: #ffffff">Event Manager: {{eventMngr}}</p>
-      <p style="color: #ffffff">Location: {{locationV}}</p>
-      <p style="color: #ffffff">Schedule: {{scheduleUrl}}</p>
-      <p style="color: #ffffff">Store: {{storePageUrl}}</p>
+    <ion-card-content id="description">
+      <p style="color: white;">{{description}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

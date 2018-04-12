@@ -31,37 +31,20 @@ export class GamesPage {
       addModal.onDidDismiss((item) => {
         if (item) {
           this.allGames = this.dataService.getGameData();
-		  //this.saveItem(item);
         }
-        //this.saveMenu();
       });
       addModal.present();
   }
   
-  loadEditGame()
+  loadEditGame(item)
   {
-    let addModal = this.modalCtrl.create(EditGamePage);
-    addModal.present();
-
-	/*let addModal = this.modelCtrl.create(EditMenuPage);
-
-    addModal.onDidDismiss( ()=> {
-		this.entreeItems = this.dataService.getEntreesData();
-		this.sideItems = this.dataService.getSidesData();
-		this.dessertItems = this.dataService.getDessertsData();
-		this.drinkItems = this.dataService.getDrinksData();
+	  
+	  
+    let addModal = this.modalCtrl.create(EditGamePage, {item: item});
+	addModal.onDidDismiss( ()=> {
+		this.allGames = this.dataService.getGameData();
     });
-    addModal.present();*/
-
-    /*
-    newGame.set("platforms", item.platforms);
-			newGame.set("admins", item.admins);
-			newGame.set("developer", item.developer);
-			newGame.set("avgRating", item.avgRating);
-			newGame.set("title", item.title);
-			newGame.set("tags", item.tags);
-			newGame.set("description", item.description);
-    */
+    addModal.present();
   }
 
   viewItem(item)

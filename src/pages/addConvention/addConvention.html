@@ -11,21 +11,25 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>
-		  <ion-label floating>Convention Name</ion-label>
+		  <ion-label stacked>Convention Name</ion-label>
 		  <ion-input type="text" [(ngModel)]="name"></ion-input>
-		</ion-item>
-		
+		</ion-item>		
 		<ion-item>
-		  <ion-label floating>Event Manager Name</ion-label>
-		  <ion-input type="text" [(ngModel)]="eventMngr"></ion-input>
-		</ion-item>
-		
-		<ion-item>
-		  <ion-label floating>Location</ion-label>
-		  <ion-input type="text" [(ngModel)]="locationV"></ion-input>
-		  
+		  <ion-label stacked>Description</ion-label>
+		  <ion-textarea type="text" [(ngModel)]="description" placeholder = "Description"></ion-textarea>
 		</ion-item>
 		<br>
+		<ion-item>
+		  <ion-label >Location</ion-label>
+		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="locationV" placeholder = "http://"></ion-input>
+		  <ion-icon name="help" item-right (click)="alertHelp()" style="margin:0px;"></ion-icon>
+		</ion-item>
+		
+		<ion-item>
+		  <ion-label >Main Page Url</ion-label>
+		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="mainPage" placeholder = "http://"></ion-input>
+		</ion-item>
+		
 		<ion-item>
 		  <ion-label >Map Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="mapUrl" placeholder = "http://"></ion-input>
@@ -54,6 +58,11 @@
 		<ion-item>
 		  <ion-label >Store Page Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="storePageUrl" placeholder = "http://"></ion-input>
+		</ion-item>
+		
+		<ion-item>
+		  <ion-label >FAQ Url</ion-label>
+		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="faq" placeholder = "http://"></ion-input>
 		</ion-item>
 	</ion-list>
   </ion-content>

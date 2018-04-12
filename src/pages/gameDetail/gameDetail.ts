@@ -26,4 +26,8 @@ export class GameDetailPage {
 		this.tags = this.navParams.get('item').tags;
 		this.description = this.navParams.get('item').description;
 	}
+	rate()
+	{
+		
+	}
 }

@@ -1,5 +1,27 @@
 page-conventionDetail {
-	
+	color:white;
+	div button{
+		display: inline-block;
+		width: 32.5%;
+		height: 60px;
+		border-radius: 0px;
+		border: solid 2px black;
+		background-color: #a50000;
+	}
+	#socialMedia button{
+		display: inline-block;
+		width: 31%;
+	}
+	#tickets{
+		width: 100%;
+	}
+	#map{
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+	p{
+		color:white;
+	}
 }
 
 

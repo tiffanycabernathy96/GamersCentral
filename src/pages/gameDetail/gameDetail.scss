@@ -1,5 +1,19 @@
 page-gameDetail {
-
+color:white;
+	#gamePage{
+		width: 100%;
+	}
+	#rateGame{
+		width:100%;
+	}
+	p{
+		color:white;
+	}
+	ion-content div{
+		border: solid 2px #a50000;
+		border-collapse: collapse;
+		padding: 10px;
+	}
 }
 
 

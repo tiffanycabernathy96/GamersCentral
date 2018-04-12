@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { Data } from '../../providers/data';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'page-conventionDetail',
@@ -13,11 +14,13 @@ export class ConventionDetailPage {
 	vendorsUrl;
 	bracketsUrl;
 	ticketsUrl;
-	eventMngr;
+	mainPage;
 	locationV;
 	scheduleUrl;
 	storePageUrl;
-  constructor(public navCtrl: NavController,public navParams: NavParams, public dataService: Data) {
+	description;
+	faq;
+  constructor(public navCtrl: NavController,public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
 	
   }
 	ionViewDidLoad(){
@@ -27,10 +30,13 @@ export class ConventionDetailPage {
 		this.vendorsUrl = this.navParams.get('item').vendorsUrl;
 		this.bracketsUrl = this.navParams.get('item').bracketsUrl;
 		this.ticketsUrl = this.navParams.get('item').ticketsUrl;
-		this.eventMngr = this.navParams.get('item').eventMngr;
+		this.mainPage = this.navParams.get('item').mainPage;
 		this.locationV = this.navParams.get('item').locationV;
+		this.locationV = this.sanitizer.bypassSecurityTrustResourceUrl(this.locationV);
 		this.scheduleUrl = this.navParams.get('item').scheduleUrl;
 		this.storePageUrl = this.navParams.get('item').storePageUrl;
+		this.description = this.navParams.get('item').description;
+		this.faq = this.navParams.get('item').faq;
 
 	}
 }

@@ -9,75 +9,79 @@
 
 <ion-content padding>
 		<ion-list>
-
-				<ion-item>
-					<ion-label floating>Game Title</ion-label>
-					<ion-input type="text" [(ngModel)]="title"></ion-input>
-				</ion-item>
-		
-				<ion-item>
-					<ion-label floating>Developer</ion-label>
-					<ion-input type="text" [(ngModel)]="developer"></ion-input>
-				</ion-item>
-				
-				<ion-item>
-					<ion-label floating>Game Platform</ion-label>
-					<ion-select type="text" required multiple="true" [(ngModel)]="platforms">
-						<ion-option value="Playstation 4">Playstation 4</ion-option>
-						<ion-option value="Playstation 3">Playstation 3</ion-option>
-						<ion-option value="Playstation 2">Playstation 2</ion-option>
-						<ion-option value="Playstation 1">Playstation 1</ion-option>
-						<ion-option value="Playstation Vita">Playstation Vita</ion-option>
-						<ion-option value="Playstation Portable(PSP)">Playstation Portable(PSP)</ion-option>
-						<ion-option value="PC">PC</ion-option>
-						<ion-option value="Xbox">Xbox</ion-option>
-						<ion-option value="Xbox 360">Xbox 360</ion-option>
-						<ion-option value="Xbox One">Xbox One</ion-option>
-						<ion-option value="Xbox One X">Xbox One X</ion-option>
-						<ion-option value="Nintendo Switch">Nintendo Switch</ion-option>
-						<ion-option value="Nintendo 3DS">Nintendo 3DS</ion-option>
-						<ion-option value="Nintendo DS">Nintendo DS</ion-option>
-						<ion-option value="Nintendo Entertainment System(NES)">Nintendo Entertainment System(NES)</ion-option>
-						<ion-option value="Super Nintendo Entertainment System">Super Nintendo Entertainment System</ion-option>
-						<ion-option value="Nintendo 64">Nintendo 64</ion-option>
-						<ion-option value="Wii">Wii</ion-option>
-						<ion-option value="Wii U">Wii U</ion-option>
-						<ion-option value="Game Cube">Game Cube</ion-option>
-						<ion-option value="Other">Other</ion-option>
-					</ion-select>
-				</ion-item>
-				
-				<ion-item>
-					<ion-label floating>Game Genre(s)</ion-label>
-					<ion-select type="text" required multiple="true" [(ngModel)]="tags">
-						<ion-option value="Adventure">Adventure</ion-option>
-						<ion-option value="Action">Action</ion-option>
-						<ion-option value="Indie">Indie</ion-option>
-						<ion-option value="Casual">Casual</ion-option>
-						<ion-option value="Strategy">Strategy</ion-option>
-						<ion-option value="RPG">RPG</ion-option>
-						<ion-option value="Sports">Sports</ion-option>
-						<ion-option value="Horror">Horror</ion-option>
-						<ion-option value="Racing">Racing</ion-option>
-						<ion-option value="Fighting">Fighting</ion-option>
-						<ion-option value="Puzzle">Puzzle</ion-option>
-						<ion-option value="Fantasy">Fantasy</ion-option>
-						<ion-option value="Sci-Fi">Sci-Fi</ion-option>
-						<ion-option value="OpenWorld">Open World</ion-option>
-						<ion-option value="FPS">FPS</ion-option>
-						<ion-option value="Shooter">Shooter</ion-option>
-						<ion-option value="Platformer">Platformer</ion-option>
-						<ion-option value="Survival">Survival</ion-option>
-						<ion-option value="Arcade">Arcade</ion-option>
-						<ion-option value="Education">Education</ion-option>
-					</ion-select>
-				</ion-item>
-		
-				<ion-item>
-					<ion-label floating>Description</ion-label>
-					<ion-textarea type="text" [(ngModel)]="description"></ion-textarea>
-				</ion-item>
-				</ion-list>
+			<ion-item>
+				<ion-label floating>Game Title</ion-label>
+				<ion-input type="text" [(ngModel)]="title"></ion-input>
+			</ion-item>
+	
+			<ion-item>
+				<ion-label floating>Developer</ion-label>
+				<ion-input type="text" [(ngModel)]="developer"></ion-input>
+			</ion-item>
+			
+		<ion-item>
+			<ion-label >Game Page Url</ion-label>
+			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="gamePageUrl" placeholder = "http://"></ion-input>
+		</ion-item>
+			
+			<ion-item>
+				<ion-label floating>Game Platform</ion-label>
+				<ion-select type="text" required multiple="true" [(ngModel)]="platforms">
+					<ion-option value="Playstation 4">Playstation 4</ion-option>
+					<ion-option value="Playstation 3">Playstation 3</ion-option>
+					<ion-option value="Playstation 2">Playstation 2</ion-option>
+					<ion-option value="Playstation 1">Playstation 1</ion-option>
+					<ion-option value="Playstation Vita">Playstation Vita</ion-option>
+					<ion-option value="Playstation Portable(PSP)">Playstation Portable(PSP)</ion-option>
+					<ion-option value="PC">PC</ion-option>
+					<ion-option value="Xbox">Xbox</ion-option>
+					<ion-option value="Xbox 360">Xbox 360</ion-option>
+					<ion-option value="Xbox One">Xbox One</ion-option>
+					<ion-option value="Xbox One X">Xbox One X</ion-option>
+					<ion-option value="Nintendo Switch">Nintendo Switch</ion-option>
+					<ion-option value="Nintendo 3DS">Nintendo 3DS</ion-option>
+					<ion-option value="Nintendo DS">Nintendo DS</ion-option>
+					<ion-option value="Nintendo Entertainment System(NES)">Nintendo Entertainment System(NES)</ion-option>
+					<ion-option value="Super Nintendo Entertainment System">Super Nintendo Entertainment System</ion-option>
+					<ion-option value="Nintendo 64">Nintendo 64</ion-option>
+					<ion-option value="Wii">Wii</ion-option>
+					<ion-option value="Wii U">Wii U</ion-option>
+					<ion-option value="Game Cube">Game Cube</ion-option>
+					<ion-option value="Other">Other</ion-option>
+				</ion-select>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label floating>Game Genre(s)</ion-label>
+				<ion-select type="text" required multiple="true" [(ngModel)]="tags">
+					<ion-option value="Adventure">Adventure</ion-option>
+					<ion-option value="Action">Action</ion-option>
+					<ion-option value="Indie">Indie</ion-option>
+					<ion-option value="Casual">Casual</ion-option>
+					<ion-option value="Strategy">Strategy</ion-option>
+					<ion-option value="RPG">RPG</ion-option>
+					<ion-option value="Sports">Sports</ion-option>
+					<ion-option value="Horror">Horror</ion-option>
+					<ion-option value="Racing">Racing</ion-option>
+					<ion-option value="Fighting">Fighting</ion-option>
+					<ion-option value="Puzzle">Puzzle</ion-option>
+					<ion-option value="Fantasy">Fantasy</ion-option>
+					<ion-option value="Sci-Fi">Sci-Fi</ion-option>
+					<ion-option value="OpenWorld">Open World</ion-option>
+					<ion-option value="FPS">FPS</ion-option>
+					<ion-option value="Shooter">Shooter</ion-option>
+					<ion-option value="Platformer">Platformer</ion-option>
+					<ion-option value="Survival">Survival</ion-option>
+					<ion-option value="Arcade">Arcade</ion-option>
+					<ion-option value="Education">Education</ion-option>
+				</ion-select>
+			</ion-item>
+	
+			<ion-item>
+				<ion-label floating>Description</ion-label>
+				<ion-textarea type="text" [(ngModel)]="description"></ion-textarea>
+			</ion-item>
+		</ion-list>
 </ion-content>
 
 

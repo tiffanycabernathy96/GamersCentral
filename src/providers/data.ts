@@ -11,71 +11,6 @@ export class Data {
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
-		
-		/*const Menu = Parse.Object.extend('Menu');
-		let query = new Parse.Query(Menu);
-		var selfStart = this;
-		query.limit(1000);
-		query.find().then((menus) => {
-			for(var i = 0; i < menus.length; i++){
-				var mymenu = {
-					name:menus[i].get("name"), 
-					price:menus[i].get("price"), 
-					category:menus[i].get("category"), 
-					url:menus[i].get("photoUrl"), 
-					description:menus[i].get("description"),
-					menuId:menus[i].id
-				}
-				selfStart.allItems.push(mymenu);
-				if(menus[i].get("category") == "Entree")
-				{
-					selfStart.entreeItems.push(mymenu);
-				}
-				if(menus[i].get("category") == "Side Dish")
-				{
-					selfStart.sideItems.push(mymenu);
-				}
-				if(menus[i].get("category") == "Dessert")
-				{
-					selfStart.dessertItems.push(mymenu);
-				}
-				if(menus[i].get("category") == "Drink")
-				{
-					selfStart.drinkItems.push(mymenu);
-				}
-				}
-			}
-		);
-
-
-		const Order = Parse.Object.extend('Order');
-		let query2 = new Parse.Query(Order);
-		var this2 = this;
-		query2.limit(1000);
-		query2.find().then((newOrders) => {
-			for(var i = 0; i < newOrders.length; i++){
-				let menuIdTemp = newOrders[i].get("menuId")
-				for(var t = 0; t < this2.allItems.length; t++)
-				{
-					if(this2.allItems[t].menuId == menuIdTemp)
-					{
-						var myorder = {
-						name:this2.allItems[t].name, 
-						price:this2.allItems[t].price, 
-						category:this2.allItems[t].category, 
-						url:this2.allItems[t].url, 
-						description:this2.allItems[t].description,
-						menuId:newOrders[i].get("menuId"), 
-						totalCost:newOrders[i].get("totalCost"), 
-						qty:newOrders[i].get("itemQty"), 
-						orderId:newOrders[i].id
-						}
-						this2.orders.push(myorder);
-					}
-				}
-			}
-		}
-		);*/
 	}
 	setCurrentUser(user)
 	{
@@ -123,201 +58,213 @@ export class Data {
 		);
 	}
 	addConvention(item)
-		{
-			const Convention = Parse.Object.extend('Convention');
-			let newConvention = new Convention();
-			//var num=Number (item.price);
-			newConvention.set("admins", item.admins);
-			newConvention.set("name", item.name);
-			newConvention.set("mapUrl", item.mapUrl);
-			newConvention.set("vendorsUrl", item.vendorsUrl);
-			newConvention.set("bracketsUrl", item.bracketsUrl);
-			newConvention.set("ticketsUrl", item.ticketsUrl);
-			newConvention.set("eventMngr", item.eventMngr);
-			newConvention.set("locationV", item.locationV);
-			newConvention.set("scheduleUrl", item.scheduleUrl);
-			newConvention.set("storePageUrl", item.storePageUrl);
-			newConvention.save(null, {
-				success: function(newConvention)
-				{
-					
-				},
-				error: function(newConvention, error)
-				{
-					alert(error.code+' Failed to Add Item ' + newConvention.get("name"));
-				}
-			});
-			let id:string = "";
-			let query = new Parse.Query(Convention);
-			query.equalTo("name", item.name);
-			query.first({
-				success: function(data){
-					if(data){
-						this.id = data.id;
-					} else {
-						return null;
-					}
-				}
-			});
-		}
-
-		getConventionData() {
-			const Convention = Parse.Object.extend('Convention');
-			let query = new Parse.Query(Convention);
-			var items = [];
-			query.limit(1000);
-			query.find().then((conventions) => {
-			  console.log(conventions.length)
-			  for (var i = conventions.length - 1; i >= 0; i--){
-				var myConvention = {
-				  admins: conventions[i].get("admins"),
-				  name: conventions[i].get("name"),
-				  mapUrl: conventions[i].get("mapUrl"),
-				  vendorsUrl: conventions[i].get("vendorsUrl"),
-				  bracketsUrl: conventions[i].get("bracketUrl"),
-				  ticketsUrl: conventions[i].get("ticketsUrl"),
-				  eventMngr: conventions[i].get("eventMngr"),
-				  locationV: conventions[i].get("locationV"),
-				  scheduleUrl: conventions[i].get("scheduleUrl"),
-				  storePageUrl: conventions[i].get("storePageUrl")
-				}
-				items.push(myConvention);
-			  }
-			  return items;
-		
-			}, (error) => {
-			  console.log("error");
-			});
-		
-			return items;
-		  }
-
-		addGame(item)
-		{
-			const Game = Parse.Object.extend('Game');
-			let newGame = new Game();
-			//var num=Number (item.price);
-			newGame.set("platforms", item.platforms);
-			newGame.set("admins", item.admins);
-			newGame.set("developer", item.developer);
-			newGame.set("avgRating", item.avgRating);
-			newGame.set("title", item.title);
-			newGame.set("tags", item.tags);
-			newGame.set("description", item.description);
-			newGame.save(null, {
-				success: function(newGame)
-				{
-					
-				},
-				error: function(newGame, error)
-				{
-					alert(error.code+' Failed to Add Item ' + newGame.get("name"));
-				}
-			});
-			let id:string = "";
-			let query = new Parse.Query(Game);
-			query.equalTo("name", item.name);
-			query.first({
-				success: function(data){
-					if(data){
-						this.id = data.id;
-					} else {
-						return null;
-					}
-				}
-			});
-		}
-
-		getGameData() {
-			const Game = Parse.Object.extend('Game');
-			let query = new Parse.Query(Game);
-			var items = [];
-			query.limit(1000);
-			query.find().then((games) => {
-			  console.log(games.length)
-			  for (var i = games.length - 1; i >= 0; i--){
-				var myGame = {
-				  platforms: games[i].get("platforms"),
-				  admins: games[i].get("admins"),
-				  developer: games[i].get("developer"),
-				  avgRating: games[i].get("avgRating"),
-				  title: games[i].get("title"),
-				  tags: games[i].get("tags"),
-				  description: games[i].get("description")
-				}
-				items.push(myGame);
-			  }
-			  return items;
-		
-			}, (error) => {
-			  console.log("error");
-			});
-		
-			return items; 
-		  }
-
-			/*var myconventions = 
-			{
-				name:item.name, 
-				price:num, 
-				category:item.category, 
-				url:item.url, 
-				description:item.description,
-				menuId:id
-			
-			}
-			this.allItems.push(mymenu);
-			if(newMenu.get("category") == "Entree")
-			{
-				this.entreeItems.push(mymenu);
-			}
-			if(newMenu.get("category") == "Side Dish")
-			{
-			  this.sideItems.push(mymenu);
-			}
-			if(newMenu.get("category") == "Dessert")
-			{
-			  this.dessertItems.push(mymenu);
-			}
-			if(newMenu.get("category") == "Drink")
-			{
-			  this.drinkItems.push(mymenu);
-			}*/
-
-	/*getOrders()
 	{
-		this.orders = [];
-		const Order = Parse.Object.extend('Order');
-		let queryGetOrders = new Parse.Query(Order);
-		queryGetOrders.limit(1000);
-		queryGetOrders.find().then((newOrders) => {
-			for(var i = 0; i < newOrders.length; i++){
-				let menuIdTemp = newOrders[i].get("menuId")
-				for(var t = 0; t < this.allItems.length; t++)
-				{
-					if(this.allItems[t].menuId == menuIdTemp)
-					{
-						var myorder = {
-						name:this.allItems[t].name, 
-						price:this.allItems[t].price, 
-						category:this.allItems[t].category, 
-						url:this.allItems[t].url, 
-						description:this.allItems[t].description,
-						menuId:newOrders[i].get("menuId"), 
-						totalCost:newOrders[i].get("totalCost"), 
-						qty:newOrders[i].get("itemQty"), 
-						orderId:newOrders[i].id
-						}
-						this.orders.push(myorder);
-					}
+		const Convention = Parse.Object.extend('Convention');
+		let newConvention = new Convention();
+		newConvention.set("admins", this.currentUser);
+		newConvention.set("name", item.name);
+		newConvention.set("locationV",item.locationV);
+		newConvention.set("mapUrl", item.mapUrl);
+		newConvention.set("vendorsUrl", item.vendorsUrl);
+		newConvention.set("bracketsUrl", item.bracketsUrl);
+		newConvention.set("ticketsUrl", item.ticketsUrl);
+		newConvention.set("mainPage", item.mainPage);
+		newConvention.set("scheduleUrl", item.scheduleUrl);
+		newConvention.set("storePageUrl", item.storePageUrl);
+		newConvention.set("Description", item.description);
+		newConvention.set("FaQ", item.faq);
+		newConvention.save(null, {
+			success: function(newConvention)
+			{
+				
+			},
+			error: function(newConvention, error)
+			{
+				alert(error.code+' Failed to Add Item ' + newConvention.get("name"));
+			}
+		});
+		let id:string = "";
+		let query = new Parse.Query(Convention);
+		query.equalTo("name", item.name);
+		query.first({
+			success: function(data){
+				if(data){
+					this.id = data.id;
+				} else {
+					return null;
 				}
+			}
+		});
+	}
+
+	getConventionData() {
+		const Convention = Parse.Object.extend('Convention');
+		let query = new Parse.Query(Convention);
+		var items = [];
+		query.limit(1000);
+		query.find().then((conventions) => {
+		  console.log(conventions.length)
+		  for (var i = conventions.length-1; i >= 0; i--){
+			var myConvention = {
+				id: conventions[i].id,
+				admins: conventions[i].get("admins"),
+				name: conventions[i].get("name"),
+				mapUrl: conventions[i].get("mapUrl"),
+				vendorsUrl: conventions[i].get("vendorsUrl"),
+				bracketsUrl: conventions[i].get("bracketsUrl"),
+				ticketsUrl: conventions[i].get("ticketsUrl"),
+				mainPage: conventions[i].get("mainPage"),
+				locationV: conventions[i].get("locationV"),
+				scheduleUrl: conventions[i].get("scheduleUrl"),
+				storePageUrl: conventions[i].get("storePageUrl"),
+				description: conventions[i].get("Description"),
+				faq: conventions[i].get("FaQ")
+			}
+			items.push(myConvention);
+		  }
+		  return items;
+	
+		}, (error) => {
+		  console.log("error");
+		});
+	
+		return items;
+	  }
+
+	addGame(item)
+	{
+		const Game = Parse.Object.extend('Game');
+		let newGame = new Game();
+		newGame.set("platforms", item.platforms);
+		newGame.set("admins", this.currentUser);
+		newGame.set("developer", item.developer);
+		newGame.set("avgRating", item.avgRating);
+		newGame.set("title", item.title);
+		newGame.set("tags", item.tags);
+		newGame.set("description", item.description);
+		newGame.set("gamePageUrl", item.gamePageUrl);
+		newGame.save(null, {
+			success: function(newGame)
+			{
+				
+			},
+			error: function(newGame, error)
+			{
+				alert(error.code+' Failed to Add Item ' + newGame.get("name"));
+			}
+		});
+		let id:string = "";
+		let query = new Parse.Query(Game);
+		query.equalTo("name", item.name);
+		query.first({
+			success: function(data){
+				if(data){
+					this.id = data.id;
+				} else {
+					return null;
+				}
+			}
+		});
+	}
+
+	getGameData() {
+		const Game = Parse.Object.extend('Game');
+		let query = new Parse.Query(Game);
+		var items = [];
+		query.limit(1000);
+		query.find().then((games) => {
+		  for (var i = games.length-1; i >= 0; i--){
+			var myGame = {
+				id: games[i].id,
+				platforms: games[i].get("platforms"),
+				admins: games[i].get("admins"),
+				developer: games[i].get("developer"),
+				avgRating: games[i].get("avgRating"),
+				title: games[i].get("title"),
+				tags: games[i].get("tags"),
+				description: games[i].get("description"),
+				gamePageUrl: games[i].get("gamePageUrl")
+			}
+			items.push(myGame);
+		  }
+		  return items;
+	
+		}, (error) => {
+		  console.log("error");
+		});
+	
+		return items; 
+	  }
+	saveConvention(newInfo)
+	{
+		const Convention = Parse.Object.extend('Convention');
+		let conventionInfo = new Parse.Query(Convention);
+		conventionInfo.equalTo("objectId", newInfo.id);
+		conventionInfo.first({
+			success: function(theConvention){
+				if(theConvention){
+					theConvention.set('name', newInfo.name);
+					theConvention.set('mapUrl', newInfo.mapUrl);
+					theConvention.set('vendorsUrl', newInfo.vendorsUrl);
+					theConvention.set('bracketsUrl', newInfo.bracketsUrl);
+					theConvention.set('ticketsUrl', newInfo.ticketsUrl);
+					theConvention.set('mainPage', newInfo.mainPage);
+					theConvention.set('locationV', newInfo.locationV);
+					theConvention.set('scheduleUrl', newInfo.scheduleUrl);
+					theConvention.set('storePageUrl', newInfo.storePageUrl);
+					theConvention.set('Description', newInfo.description);
+					theConvention.set('FaQ', newInfo.faq);
+					theConvention.save(null, {
+						success: function(newConventionCreated)
+						{
+							console.log("Saved");
+						},
+						error: function(response, error)
+						{
+							alert(error.code+' Failed to Save Profile ' + error.message);
+						}
+					});
+				}
+			},
+			error: function(error){
+				console.log("Error: " + error.code);
 			}
 		}
 		);
-		return this.orders;
 	}
-
-	deleteAOrder(newOrders, item)
+	saveGame(newInfo)
+	{
+		const Game = Parse.Object.extend('Game');
+		let gameInfo = new Parse.Query(Game);
+		gameInfo.equalTo("objectId", newInfo.id);
+		gameInfo.first({
+			success: function(newGame){
+				if(newGame){
+					newGame.set('username', newInfo.platforms);
+					newGame.set('password', newInfo.developer);
+					newGame.set('email', newInfo.title);
+					newGame.set('facebook', newInfo.tags);
+					newGame.set('instagram', newInfo.description);
+					newGame.set('gamePageUrl', newInfo.gamePageUrl);
+					newGame.save(null, {
+						success: function(newGame)
+						{
+							console.log("Saved");
+						},
+						error: function(response, error)
+						{
+							alert(error.code+' Failed to Save Profile ' + error.message);
+						}
+					});
+				}
+			},
+			error: function(error){
+				console.log("Error: " + error.code);
+			}
+		}
+		);
+	}
+	/*deleteAOrder(newOrders, item)
 	{
 		const Order = Parse.Object.extend('Order');
 		this.orders = newOrders;

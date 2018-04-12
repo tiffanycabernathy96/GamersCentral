@@ -22,38 +22,23 @@ export class ConventionsPage {
   {
 
   }
-
-
-  
   addConvention() {
     let addModal = this.modalCtrl.create(AddConventionPage);
     addModal.onDidDismiss((item) => {
       if (item) {
 		  this.allConventions = this.dataService.getConventionData();
-        //this.dataService.addMenu(item);
       }
     });
     addModal.present();
   }
   
-  loadEditConvention()
+  loadEditConvention(item)
   {
-    let addModal = this.modalCtrl.create(EditConventionPage);
-    addModal.present();
-
-	/*let addModal = this.modelCtrl.create(EditMenuPage);
-
-    addModal.onDidDismiss( ()=> {
-		this.entreeItems = this.dataService.getEntreesData();
-		this.sideItems = this.dataService.getSidesData();
-		this.dessertItems = this.dataService.getDessertsData();
-		this.drinkItems = this.dataService.getDrinksData();
+    let addModal = this.modalCtrl.create(EditConventionPage, {item: item});
+	addModal.onDidDismiss( ()=> {
+		this.allConventions = this.dataService.getConventionData();
     });
-    addModal.present();*/
-  }
-  ionViewWillEnter()
-  {
-	  
+    addModal.present();
   }
   viewItem(item)
   {
