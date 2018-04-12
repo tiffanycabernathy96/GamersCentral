@@ -7,6 +7,8 @@ import { GameDetailPage } from '../gameDetail/gameDetail';
 import { ConventionDetailPage } from '../conventionDetail/conventionDetail';
 import { EditGamePage } from '../editGame/editGame';
 import { EditConventionPage } from '../editConvention/editConvention';
+import { LocationSelectPage } from '../location-select/location-select';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -20,11 +22,24 @@ export class HomePage {
   public convSearchResults = [];
   public gameSearchResults = [];
   
-  constructor(public navCtrl: NavController, public modelCtrl: ModalController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
     this.conventions = this.dataService.getConventionData();
     this.games = this.dataService.getGameData();
 
   }
+
+  launchLocationPage(){
+ 
+    let modal = this.modalCtrl.create(LocationSelectPage);
+
+    modal.onDidDismiss((location) => {
+        console.log(location);
+    });
+
+    modal.present();   
+
+}
+
   delete(item)
   {
 

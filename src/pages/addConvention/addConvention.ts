@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, ModalController } from 'ionic-angular';
 import { Data } from '../../providers/data';
+import { LocationSelectPage } from '../location-select/location-select';
 
 @Component({
   selector: 'page-addConvention',
@@ -22,7 +23,7 @@ export class AddConventionPage {
 	locationCityState;
 	zipcode;
 	
-  constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data, public modalCtrl: ModalController) {
 
 	}
 	
@@ -49,6 +50,18 @@ export class AddConventionPage {
     this.view.dismiss(newConvention);
   }
 
+
+	launchLocationPage(){
+ 
+    let modal = this.modalCtrl.create(LocationSelectPage);
+
+    modal.onDidDismiss((location) => {
+        console.log(location);
+    });
+
+    modal.present();   
+
+}
 
 alertHelp()
 {
