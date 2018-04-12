@@ -22,6 +22,7 @@ export class ConventionDetailPage {
 	faq;
 	locationCityState;
 	zipcode;
+	picture;
   constructor(public navCtrl: NavController,public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
 	
   }
@@ -41,5 +42,6 @@ export class ConventionDetailPage {
 		this.faq = this.navParams.get('item').faq;
 		this.locationCityState = this.navParams.get('item').locationCityState;
 		this.zipcode = this.navParams.get('item').zipcode;
+		this.picture= this.navParams.get('item').picture;
 	}
 }

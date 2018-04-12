@@ -15,6 +15,7 @@ import { GamesPage } from '../pages/games/games';
 import { ConventionsPage } from '../pages/conventions/conventions';
 import { EditProfilePage } from '../pages/editProfile/editProfile';
 import { ProfilePage } from '../pages/profile/profile';
+import { RateGamePage } from '../pages/rateGame/rateGame';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Data } from '../providers/data';
 import { SigninPage } from '../pages/signin/signin';
@@ -45,7 +46,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
     TabsPage,
 	  SigninPage,
     SignupPage,
-    LocationSelectPage
+    LocationSelectPage,
+	  RateGamePage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
     TabsPage,
 	  SigninPage,
     SignupPage,
-    LocationSelectPage
+    LocationSelectPage,
+	  RateGamePage
   ],
   providers: [
     StatusBar,

@@ -20,11 +20,16 @@ export class GamesPage {
   {
 
   }
+  ionViewWillEnter()
+  {
+	  this.allGames = this.dataService.getGameData();
+  }
   addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
         if (item) {
-          this.allGames = this.dataService.getGameData();
+			this.dataService.addGame(item);
+			this.allGames = this.dataService.getGameData();
         }
       });
       addModal.present();

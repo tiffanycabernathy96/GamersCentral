@@ -5,7 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-
+	<div class="img">
+		<img src={{picture}} *ngIf="picture"/>
+	</div>
 	<div id="topBtns">
 		<button  color="danger"><a href={{vendorsUrl}}>Vendors</a></button>
 		<button  color="danger"><a href={{scheduleUrl}}>Schedule</a></button>
