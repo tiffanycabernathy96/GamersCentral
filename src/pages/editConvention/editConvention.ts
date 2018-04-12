@@ -23,6 +23,7 @@ export class EditConventionPage {
 	faq;
 	locationCityState;
 	zipcode;
+	picture;
   constructor(public params: NavParams, public view: ViewController, public dataService: Data) {
 	this.id = params.get('item').id;
 	this.name = params.get('item').name;
@@ -38,6 +39,7 @@ export class EditConventionPage {
 	this.faq = params.get('item').faq;
 	this.locationCityState = params.get('item').locationCityState;
 	this.zipcode = params.get('item').zipcode;
+	this.picture = params.get('item').picture;
   }
 	ionViewWillEnter()
 	{
@@ -62,7 +64,8 @@ export class EditConventionPage {
 			description: this.description,
 			faq: this.faq,
 			locationCityState: this.locationCityState,
-			zipcode: this.zipcode
+			zipcode: this.zipcode,
+			picture: this.picture
     };
 		this.dataService.saveConvention(newConvention);
 		this.view.dismiss();

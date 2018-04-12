@@ -15,6 +15,7 @@ import { GamesPage } from '../pages/games/games';
 import { ConventionsPage } from '../pages/conventions/conventions';
 import { EditProfilePage } from '../pages/editProfile/editProfile';
 import { ProfilePage } from '../pages/profile/profile';
+import { RateGamePage } from '../pages/rateGame/rateGame';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Data } from '../providers/data';
 import { SigninPage } from '../pages/signin/signin';
@@ -38,7 +39,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 	ProfilePage,
     TabsPage,
 	SigninPage,
-	SignupPage
+	SignupPage,
+	RateGamePage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 	ProfilePage,
     TabsPage,
 	SigninPage,
-	SignupPage
+	SignupPage,
+	RateGamePage
   ],
   providers: [
     StatusBar,

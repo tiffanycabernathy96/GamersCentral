@@ -30,12 +30,17 @@
 		<ion-item>
 		  <ion-label >Location Map Embed</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="locationV" placeholder = "http://"></ion-input>
-		  <ion-icon name="help" item-right (click)="alertHelp()" style="margin:0px;"></ion-icon>
+		  <ion-icon name="help" item-right (click)="presentAlert()" style="margin:0px;"></ion-icon>
 		</ion-item>
 		
 		<ion-item>
 		  <ion-label >Main Page Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="mainPage" placeholder = "http://"></ion-input>
+		</ion-item>
+		
+		<ion-item>
+		  <ion-label >Convention Logo Url</ion-label>
+		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="picture" placeholder = "http://"></ion-input>
 		</ion-item>
 		
 		<ion-item>

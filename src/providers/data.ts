@@ -8,9 +8,11 @@ export class Data {
 	private parseJSKey: string = 'jyIut17JVHHJFTlOVPqqTdhlQ00GUd6tBpOLYrbZ';
 	private parseServerUrl: string= 'https://parseapi.back4app.com/';
 	public currentUser;
+
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
+
 	}
 	setCurrentUser(user)
 	{
@@ -22,6 +24,7 @@ export class Data {
 	{
 		return this.currentUser;
 	}
+
 	saveProfile(newInfo)
 	{
 		const User = Parse.Object.extend('User');
@@ -63,7 +66,6 @@ export class Data {
 	{
 		const Convention = Parse.Object.extend('Convention');
 		let newConvention = new Convention();
-		newConvention.set("admins", this.currentUser);
 		newConvention.set("name", item.name);
 		newConvention.set("locationV",item.locationV);
 		newConvention.set("mapUrl", item.mapUrl);
@@ -77,6 +79,7 @@ export class Data {
 		newConvention.set("locationCityState", item.locationCityState);
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
+		newConvention.set("picture", item.picture);
 		newConvention.save(null, {
 			success: function(newConvention)
 			{
@@ -87,18 +90,20 @@ export class Data {
 				alert(error.code+' Failed to Add Item ' + newConvention.get("name"));
 			}
 		});
+		
 		let id:string = "";
 		let query = new Parse.Query(Convention);
 		query.equalTo("name", item.name);
 		query.first({
 			success: function(data){
 				if(data){
-					this.id = data.id;
+					id = data.id;
 				} else {
 					return null;
 				}
 			}
 		});
+		newConvention.set("id", id);
 	}
 
 	getConventionData() {
@@ -124,14 +129,15 @@ export class Data {
 				description: conventions[i].get("Description"),
 				locationCityState: conventions[i].get("locationCityState"),
 				zipcode: conventions[i].get("zipcode"),
-				faq: conventions[i].get("FaQ")
+				faq: conventions[i].get("FaQ"),
+				picture: conventions[i].get("picture")
 			}
 			items.push(myConvention);
 		  }
 		  return items;
 	
 		}, (error) => {
-		  console.log("error");
+		  
 		});
 	
 		return items;
@@ -142,9 +148,7 @@ export class Data {
 		const Game = Parse.Object.extend('Game');
 		let newGame = new Game();
 		newGame.set("platforms", item.platforms);
-		newGame.set("admins", this.currentUser);
 		newGame.set("developer", item.developer);
-		newGame.set("avgRating", item.avgRating);
 		newGame.set("title", item.title);
 		newGame.set("steamEmbed", item.steamEmbed);
 		newGame.set("tags", item.tags);
@@ -161,18 +165,20 @@ export class Data {
 				alert(error.code+' Failed to Add Item ' + newGame.get("name"));
 			}
 		});
+		
 		let id:string = "";
 		let query = new Parse.Query(Game);
-		query.equalTo("name", item.name);
+		query.equalTo("name", item.title);
 		query.first({
 			success: function(data){
 				if(data){
-					this.id = data.id;
+					id = data.id;
 				} else {
 					return null;
 				}
 			}
 		});
+		newGame.set("id", id);
 	}
 
 	getGameData() {
@@ -200,7 +206,7 @@ export class Data {
 		  return items;
 	
 		}, (error) => {
-		  console.log("error");
+		  
 		});
 	
 		return items; 
@@ -226,6 +232,7 @@ export class Data {
 					theConvention.set('FaQ', newInfo.faq);
 					theConvention.set('locationCityState', newInfo.loationCityState);
 					theConvention.set('zipcode', newInfo.zipcode);
+					theConvention.set('picture', newInfo.picture);
 					theConvention.save(null, {
 						success: function(newConventionCreated)
 						{

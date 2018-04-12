@@ -11,7 +11,6 @@ export class AddGamePage {
 	platforms = [];
 	admins = [];
 	developer;
-	avgRating: Number;
 	title;
 	tags = [];
 	description;
@@ -28,7 +27,6 @@ export class AddGamePage {
 		platforms: this.platforms,
 		admins: this.admins,
 		developer: this.developer,
-		avgRating: this.avgRating,
 		title: this.title,
 		tags: this.tags,
 		description: this.description,
@@ -37,7 +35,7 @@ export class AddGamePage {
 		youtubeEmbed: this.youtubeEmbed
     };
 
-		this.dataService.addGame(newGame);
+		//this.dataService.addGame(newGame);
     this.view.dismiss(newGame);
   }
 

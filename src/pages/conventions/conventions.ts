@@ -22,11 +22,17 @@ export class ConventionsPage {
   {
 
   }
+  ionViewWillEnter()
+  {
+	  this.allConventions = this.dataService.getConventionData();
+  }
   addConvention() {
     let addModal = this.modalCtrl.create(AddConventionPage);
+	let self=this;
     addModal.onDidDismiss((item) => {
       if (item) {
-		  this.allConventions = this.dataService.getConventionData();
+		  self.dataService.addConvention(item);
+		  self.allConventions = self.dataService.getConventionData();
       }
     });
     addModal.present();
@@ -35,8 +41,9 @@ export class ConventionsPage {
   loadEditConvention(item)
   {
     let addModal = this.modalCtrl.create(EditConventionPage, {item: item});
+	let self=this;
 	addModal.onDidDismiss( ()=> {
-		this.allConventions = this.dataService.getConventionData();
+		self.allConventions = self.dataService.getConventionData();
     });
     addModal.present();
   }
