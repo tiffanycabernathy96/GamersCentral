@@ -44,7 +44,6 @@ export class LocationSelectPage {
         this.searchDisabled = false;
 
     });
-
 }
 
 selectPlace(place){
@@ -56,6 +55,8 @@ selectPlace(place){
       lng: null,
       name: place.name
   };
+
+  
 
   this.placesService.getDetails({placeId: place.place_id}, (details) => {
 
@@ -71,6 +72,9 @@ selectPlace(place){
           this.location = location;
 
       });
+
+    console.log("Latitude: " + location.lat);
+    console.log("Longitude: " + location.lng);
 
   });
 
@@ -107,6 +111,8 @@ searchPlace(){
 }
 
 save(){
+  
+
   this.viewCtrl.dismiss(this.location);
 }
 

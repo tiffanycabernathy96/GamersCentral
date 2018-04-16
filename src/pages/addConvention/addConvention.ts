@@ -25,6 +25,8 @@ export class AddConventionPage {
 	locationCityState;
 	zipcode;
 	picture;
+	latitude;
+	longitude;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data, public modalCtrl: ModalController, private alertCtrl: AlertController) {
 
@@ -48,10 +50,14 @@ export class AddConventionPage {
 		faq: this.faq,
 		locationCityState: this.locationCityState,
 		zipcode: this.zipcode,
-		picture: this.picture
+		picture: this.picture,
+		latitude: this.latitude,
+		longitude: this.longitude
     };
 
-	
+		console.log("New Convention Lat: " + newConvention.latitude);
+		console.log("New Convention Long: " + newConvention.longitude);
+
     this.view.dismiss(newConvention);
   }
 
@@ -60,7 +66,9 @@ export class AddConventionPage {
     let modal = this.modalCtrl.create(LocationSelectPage);
 
     modal.onDidDismiss((location) => {
-        console.log(location);
+				console.log(location);
+				this.latitude = location.lat;
+				this.longitude = location.lng;
     });
 
     modal.present();   
