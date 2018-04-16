@@ -80,10 +80,12 @@ export class Data {
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.set("picture", item.picture);
+		newConvention.set("latitude", String(item.latitude));
+		newConvention.set("longitude", item.longitude);
 		newConvention.save(null, {
 			success: function(newConvention)
 			{
-				
+				console.log("Latitude: " + newConvention.latitude);	
 			},
 			error: function(newConvention, error)
 			{

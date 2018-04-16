@@ -20,8 +20,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { Data } from '../providers/data';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
+import { LocationSelectPage } from '../pages/location-select/location-select'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
+import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
+import { Network } from '@ionic-native/network';
+import { Geolocation } from '@ionic-native/geolocation';
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -29,23 +35,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     GameDetailPage,
     ConventionDetailPage,
-	AddGamePage,
-	AddConventionPage,
-	EditGamePage,
-	EditConventionPage,
-	GamesPage,
-	ConventionsPage,
-	EditProfilePage,
-	ProfilePage,
+	  AddGamePage,
+	  AddConventionPage,
+	  EditGamePage,
+	  EditConventionPage,
+	  GamesPage,
+	  ConventionsPage,
+	  EditProfilePage,
+	  ProfilePage,
     TabsPage,
-	SigninPage,
-	SignupPage,
-	RateGamePage
+	  SigninPage,
+    SignupPage,
+    LocationSelectPage,
+	  RateGamePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-	IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,25 +61,31 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     GameDetailPage,
     ConventionDetailPage,
-	AddGamePage,
-	AddConventionPage,
-	EditGamePage,
-	EditConventionPage,
-	GamesPage,
-	ConventionsPage,
-	EditProfilePage,
-	ProfilePage,
+	  AddGamePage,
+	  AddConventionPage,
+	  EditGamePage,
+	  EditConventionPage,
+	  GamesPage,
+	  ConventionsPage,
+	  EditProfilePage,
+	  ProfilePage,
     TabsPage,
-	SigninPage,
-	SignupPage,
-	RateGamePage
+	  SigninPage,
+    SignupPage,
+    LocationSelectPage,
+	  RateGamePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Data,
+	  Camera,
+    ConnectivityServiceProvider,
+    GoogleMapsProvider,
+    Network,
+    Geolocation,
+    HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-	Data,
-	Camera
   ]
 })
 export class AppModule {}

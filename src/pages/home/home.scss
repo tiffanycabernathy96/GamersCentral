@@ -52,4 +52,8 @@ img{
 .name{
 	float: left;
 }
+ion-thumbnail img{
+	min-width: 0px;
+	min-height: 0px;
+}
 }
