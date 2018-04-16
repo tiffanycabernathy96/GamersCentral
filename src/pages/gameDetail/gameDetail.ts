@@ -3,6 +3,7 @@ import { NavParams, NavController, ModalController } from 'ionic-angular';
 import { Data } from '../../providers/data';
 import { DomSanitizer} from '@angular/platform-browser';
 import { RateGamePage } from '../rateGame/rateGame';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-gameDetail',
@@ -20,7 +21,7 @@ export class GameDetailPage {
 	steamEmbed;
 	youtubeEmbed;
 	gamePageUrl;
-  constructor(public navCtrl: NavController,public modalCtrl: ModalController, public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
+  constructor(public navCtrl: NavController,public modalCtrl: ModalController, public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer , private alertCtrl: AlertController) {
 	
   }
 	ionViewDidLoad(){
@@ -40,23 +41,24 @@ export class GameDetailPage {
 	}
 	rate()
 	{
-		let addModal = this.modalCtrl.create(RateGamePage, {title: this.title, avgRating: this.avgRating, id: this.id});
-		addModal.onDidDismiss( (rating)=> {
-		this.avgRating = rating;
-		let newGame = {
-			id: this.id,
-			platforms: this.platforms,
-			developer: this.developer,
-			title: this.title,
-			tags: this.tags,
-			avgRating: this.avgRating,
-			description: this.description,
-			gamePageUrl: this.gamePageUrl,
-			steamEmbed: this.steamEmbed,
-			youtubeEmbed: this.youtubeEmbed,
-    };
-		this.dataService.saveGame(newGame);
-    });
-    addModal.present();
+		
+		// let addModal = this.modalCtrl.create(RateGamePage, {title: this.title, avgRating: this.avgRating, id: this.id});
+		// addModal.onDidDismiss( (rating)=> {
+		// this.avgRating = rating;
+		// let newGame = {
+			// id: this.id,
+			// platforms: this.platforms,
+			// developer: this.developer,
+			// title: this.title,
+			// tags: this.tags,
+			// avgRating: this.avgRating,
+			// description: this.description,
+			// gamePageUrl: this.gamePageUrl,
+			// steamEmbed: this.steamEmbed,
+			// youtubeEmbed: this.youtubeEmbed,
+    // };
+		// this.dataService.saveGame(newGame);
+    // });
+    // addModal.present();
 	}
 }

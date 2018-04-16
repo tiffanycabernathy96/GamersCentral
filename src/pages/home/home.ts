@@ -46,35 +46,12 @@ onInput(event)
 			this.gameSearchResults = [];
 	}
 }
-  addItem() {
-    /*let addModal = this.modelCtrl.create(AddItemPage);
-    addModal.onDidDismiss((item) => {
-      if (item) {
-        this.dataService.addMenu(item);
-      }
-    });
-    addModal.present();*/
-  }
-  
-  loadEditMenu()
-  {
-	/*let addModal = this.modelCtrl.create(EditMenuPage);
-
-    addModal.onDidDismiss( ()=> {
-		this.entreeItems = this.dataService.getEntreesData();
-		this.sideItems = this.dataService.getSidesData();
-		this.dessertItems = this.dataService.getDessertsData();
-		this.drinkItems = this.dataService.getDrinksData();
-    });
-    addModal.present();*/
-  }
   ionViewWillEnter()
   {
 	  
   }
   viewConventionItem(item)
   {
-	  console.log("stop");
 	  this.navCtrl.push(ConventionDetailPage, 
 	  {item: item});
   }
