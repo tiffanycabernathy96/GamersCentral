@@ -81,13 +81,12 @@ export class Data {
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.set("picture", item.picture);
-		//newConvention.set("latitude", String(item.latitude));
-		//newConvention.set("longitude", item.longitude);
+		newConvention.set("lat", item.latitude);
+		newConvention.set("lng", item.longitude);
 		await newConvention.save(null, {
 			success: function(newConvention)
 			{
-				console.log("A new convention was saved " + newConvention.get("name"));
-				console.log("Latitude: " + newConvention.get("latitude"));	
+				console.log("A new convention was saved " + newConvention.get("name"));	
 			},
 			error: function(newConvention, error)
 			{
