@@ -22,7 +22,6 @@ export class GameDetailPage {
 	steamEmbed;
 	youtubeEmbed;
 	gamePageUrl;
-
 	rateDisable: boolean;
   constructor(private alertCtrl: AlertController, public navCtrl: NavController,public modalCtrl: ModalController, public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
 	
@@ -115,5 +114,6 @@ export class GameDetailPage {
 		this.dataService.saveGame(newGame);
     });
     addModal.present();*/
+
 	}
 }
