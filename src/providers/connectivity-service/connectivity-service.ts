@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable'
 
 /*
   Generated class for the ConnectivityServiceProvider provider.

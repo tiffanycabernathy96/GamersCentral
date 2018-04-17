@@ -9,7 +9,6 @@ import { Data } from '../../providers/data';
 export class AddGamePage {
 
 	platforms = [];
-	admins = [];
 	developer;
 	title;
 	tags = [];
@@ -25,7 +24,6 @@ export class AddGamePage {
 		
     let newGame = {
 		platforms: this.platforms,
-		admins: this.admins,
 		developer: this.developer,
 		title: this.title,
 		tags: this.tags,
