@@ -26,9 +26,9 @@
                     <p>Developer: {{item.developer}}</p>
                     <p>Game Page URL: {{item.gamePageUrl}}</p>
                   </ion-item>
-                    <ion-item-options side="right">
+                    <ion-item-options side="right"> 
                         <button ion-button (click)="loadEditGame(item)"><ion-icon name="create"></ion-icon>Edit</button>
-                        <button ion-button color="danger"><ion-icon name="trash"></ion-icon>Delete</button>
+                        <button ion-button color="danger" disabled=true;><ion-icon name="trash"></ion-icon>Delete</button>
                     </ion-item-options>
               </ion-item-sliding> 
             </ion-list>

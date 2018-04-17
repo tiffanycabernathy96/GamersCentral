@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { Data } from '../../providers/data';
 import { DomSanitizer} from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'page-conventionDetail',
@@ -23,6 +24,8 @@ export class ConventionDetailPage {
 	locationCityState;
 	zipcode;
 	picture;
+	latitude;
+	longitude;
   constructor(public navCtrl: NavController,public navParams: NavParams, public dataService: Data, private sanitizer: DomSanitizer) {
 	
   }
@@ -43,5 +46,7 @@ export class ConventionDetailPage {
 		this.locationCityState = this.navParams.get('item').locationCityState;
 		this.zipcode = this.navParams.get('item').zipcode;
 		this.picture= this.navParams.get('item').picture;
+		this.latitude = this.navParams.get('item').latitude,
+		this.longitude = this.navParams.get('item').longitude
 	}
 }

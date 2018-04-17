@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, ModalController } from 'ionic-angular';
 import { Data } from '../../providers/data';
-
+import { AgmCoreModule } from '@agm/core';
+import { LocationSelectPage } from '../location-select/location-select';
 
 @Component({
   selector: 'page-editConvention',
@@ -24,7 +25,10 @@ export class EditConventionPage {
 	locationCityState;
 	zipcode;
 	picture;
-  constructor(public params: NavParams, public view: ViewController, public dataService: Data) {
+	latitude;
+	longitude;
+	location: any;
+  constructor(public params: NavParams, public view: ViewController, public dataService: Data, public modalCtrl: ModalController) {
 	this.id = params.get('item').id;
 	this.name = params.get('item').name;
 	this.mapUrl = params.get('item').mapUrl;
@@ -40,6 +44,8 @@ export class EditConventionPage {
 	this.locationCityState = params.get('item').locationCityState;
 	this.zipcode = params.get('item').zipcode;
 	this.picture = params.get('item').picture;
+	this.latitude = params.get('item').latitude,
+	this.longitude = params.get('item').longitude
   }
 	ionViewWillEnter()
 	{
@@ -48,7 +54,7 @@ export class EditConventionPage {
 
   
 	save() {
-		
+		this.setLatLon();
 		let newConvention = {
 			id: this.id,
 			admins: this.admins,
@@ -65,15 +71,37 @@ export class EditConventionPage {
 			faq: this.faq,
 			locationCityState: this.locationCityState,
 			zipcode: this.zipcode,
-			picture: this.picture
+			picture: this.picture,
+			latitude: this.latitude,
+			longitude: this.longitude
     };
 		this.dataService.saveConvention(newConvention);
 		this.view.dismiss();
   }
-alertHelp()
-{
-	alert("This Field should be an embed link to your Event.\n1.)Go to Google Maps, Search for your event then select the left menu button \n2.)Select Share or embed map \n3.)Select Embed a map then only get the value within the src= do not include quotes.\n\n\ni.e. <iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13290.788849037426!2d-84.4043297!3d33.6131599!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x51d53049737d133d!2sDragon+Con+Inc.!5e0!3m2!1sen!2sus!4v1523505329650\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\n\n\nNeeds to Be https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13290.788849037426!2d-84.4043297!3d33.6131599!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x51d53049737d133d!2sDragon+Con+Inc.!5e0!3m2!1sen!2sus!4v1523505329650");
-}
+	launchLocationPage(){ 
+
+		let modal = this.modalCtrl.create(LocationSelectPage);
+
+		modal.onDidDismiss((location) => {
+			console.log(location);
+			this.location = location;
+			if(this.location != undefined)
+			{
+				this.latitude = this.location.lat;
+				this.longitude = this.location.lng;
+			} 
+		});
+		modal.present();   
+
+	}
+
+	setLatLon() {
+		if(this.location != undefined)
+		{
+			this.latitude = this.location.lat;
+			this.longitude = this.location.lng;
+		}
+	}
   close() {
     this.view.dismiss();
   }

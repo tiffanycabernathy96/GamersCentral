@@ -15,7 +15,6 @@ import { GamesPage } from '../pages/games/games';
 import { ConventionsPage } from '../pages/conventions/conventions';
 import { EditProfilePage } from '../pages/editProfile/editProfile';
 import { ProfilePage } from '../pages/profile/profile';
-import { RateGamePage } from '../pages/rateGame/rateGame';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Data } from '../providers/data';
 import { SigninPage } from '../pages/signin/signin';
@@ -28,6 +27,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -46,14 +46,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 	TabsPage,
 	SigninPage,
 	SignupPage,
-	LocationSelectPage,
-	RateGamePage
+	LocationSelectPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAFYM38buX_qRA6yBpt2XXPAhM-APCvqCY'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,8 +74,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 	TabsPage,
 	SigninPage,
 	SignupPage,
-	LocationSelectPage,
-	RateGamePage
+	LocationSelectPage
   ],
   providers: [
 	StatusBar,

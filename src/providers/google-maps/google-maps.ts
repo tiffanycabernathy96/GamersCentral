@@ -34,7 +34,7 @@ export class GoogleMapsProvider {
     return this.loadGoogleMaps();
  
   }
-
+ 
   loadGoogleMaps(): Promise<any> {
  
     return new Promise((resolve) => {

@@ -16,7 +16,7 @@ export class ConventionsPage {
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
 	this.dataService.getConventionData().then(conventions =>{this.allConventions = conventions;});
-
+  
   }
   delete(item)
   {

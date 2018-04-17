@@ -1,4 +1,4 @@
-page-editConvension{
+page-editConvention{
 	height: auto;
 	#closeBtn{
 		float: left;
@@ -27,5 +27,12 @@ page-editConvension{
 	}
 	input[type=number]:before {
 		content: "$";
+	}
+	agm-map{
+		width: 100%;
+		height: 300px;
+	}
+	.launch{
+		width: 100%;
 	}
 }

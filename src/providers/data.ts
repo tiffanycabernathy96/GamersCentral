@@ -81,13 +81,12 @@ export class Data {
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.set("picture", item.picture);
-		//newConvention.set("latitude", String(item.latitude));
-		//newConvention.set("longitude", item.longitude);
+		newConvention.set("lat", item.latitude);
+		newConvention.set("lng", item.longitude);
 		await newConvention.save(null, {
 			success: function(newConvention)
 			{
-				console.log("A new convention was saved " + newConvention.get("name"));
-				console.log("Latitude: " + newConvention.get("latitude"));	
+	
 			},
 			error: function(newConvention, error)
 			{
@@ -135,8 +134,8 @@ export class Data {
 				zipcode: conventions[i].get("zipcode"),
 				faq: conventions[i].get("FaQ"),
 				picture: conventions[i].get("picture"),
-				latitude: conventions[i].get("latitude"),
-				longitude: conventions[i].get("longitude")
+				latitude: conventions[i].get("lat"),
+				longitude: conventions[i].get("lng")
 			}
 			items.push(myConvention);
 		  }
@@ -238,6 +237,8 @@ export class Data {
 					theConvention.set('locationCityState', newInfo.loationCityState);
 					theConvention.set('zipcode', newInfo.zipcode);
 					theConvention.set('picture', newInfo.picture);
+					theConvention.set('lat', newInfo.latitude);
+					theConvention.set('lng', newInfo.longitude);
 					theConvention.save(null, {
 						success: function(newConventionCreated)
 						{
@@ -305,17 +306,17 @@ export class Data {
 		});
 		return exists;
 	}
-	async addRating(gameId, ratingValue: Number)
+	async addRating(gameId, ratingValue)
 	{
 		const Rating = Parse.Object.extend('Rating');
 		let newRating = new Rating();
 		newRating.set("User", this.currentUser);
 		newRating.set("Game", gameId);
-		newRating.set("Rating", parseInt(ratingValue));
+		newRating.set("Rating", ratingValue);
 		await newRating.save(null, {
 			success: function(savedRating)
-			{
-				
+			{ 
+				 
 			},
 			error: function(error)
 			{
@@ -323,7 +324,7 @@ export class Data {
 			}
 		});
 		
-		let avgRate = 0;
+		let avgRate= 0;
 		let sum=0;
 		let numRatings = 0;
 		const NumberOfRatings = Parse.Object.extend('Rating');
@@ -336,13 +337,13 @@ export class Data {
 			numRatings = ratings.length;
 			
 		});
-		sum = sum+parseInt(ratingValue);
+		sum = sum+ratingValue;
 		 if(numRatings == 0 || numRatings == undefined)
 		 {
 			 avgRate = sum;
 		 }
 		 else{
-			 avgRate = parseInt(sum/numRatings);
+			 avgRate = sum/numRatings ;
 		 }
 		const Game = Parse.Object.extend('Game');
 		let gameInfo = new Parse.Query(Game);

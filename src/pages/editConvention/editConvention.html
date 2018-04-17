@@ -26,10 +26,13 @@
 			<ion-textarea type="text" [(ngModel)]="description" placeholder = "Description"></ion-textarea>
 		</ion-item>
 		<br>
+		<ion-item *ngIf="latitude && longitude">
+			<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15">
+				<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+			</agm-map>
+		</ion-item>
 		<ion-item>
-			<ion-label >Location Map Embed</ion-label>
-			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="locationV" placeholder = "http://"></ion-input>
-			<ion-icon name="help" item-right (click)="alertHelp()" style="margin:0px;"></ion-icon>
+			<button ion-button class="launch" (click)="launchLocationPage()">Set Location</button>
 		</ion-item>
 
 		<ion-item>

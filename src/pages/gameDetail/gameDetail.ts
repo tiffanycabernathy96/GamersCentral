@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavParams, NavController, ModalController } from 'ionic-angular';
 import { Data } from '../../providers/data';
 import { DomSanitizer} from '@angular/platform-browser';
-import { RateGamePage } from '../rateGame/rateGame';
 import { AlertController } from 'ionic-angular';
 
 @Component({
@@ -89,6 +88,7 @@ export class GameDetailPage {
 					{
 						console.log('Radio data:', data);
 						this.dataService.addRating(this.id, parseInt(data)).then(value=>{this.avgRating = value;});
+						this.rateDisable = false;
 					}
 				}
 			}
