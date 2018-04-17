@@ -4,7 +4,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+
+<ion-content padding >
+
 		<div>
 			<iframe width="100%" height="315" [src]="youtubeEmbed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 		</div>
@@ -38,10 +40,7 @@
 				</li>
 			</ul>
 		</div>
-		
-		
-		
 		<button ng-if="gamePageUrl != undefined" ion-button color="danger" id="gamePage"><a href={{gamePageUrl}}>Game Page Url</a></button>
-		<button ion-button color="danger" id="rateGame" (click)="rate()">Rate Game</button>
+		<button ion-button color="danger" id="rateGame" (click)="rate()"  *ngIf="rateDisable">Rate Game</button>
 
 </ion-content>

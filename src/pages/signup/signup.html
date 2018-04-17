@@ -7,9 +7,9 @@
 <ion-content>
 
   <form (submit)="doRegister()">
-    <ion-list padding inset scroll="false">
-		<ion-item>
-			<img class="img" [src]="picture" *ngIf="picture"/>
+    <ion-list padding>
+		<ion-item *ngIf="picture">
+			<img name="pic" class="img" [src]="picture" *ngIf="picture"/>
 		</ion-item>
 		<ion-item>
 			<ion-icon item-right name="camera" (click)="takePicture()" class="cameraButton"></ion-icon>
@@ -32,11 +32,11 @@
 	  </ion-item>
 	  <ion-item>
 			<ion-label stacked>Location City,State</ion-label>
-			<ion-input type="text" [(ngModel)]="locationCityState" placeholder="Ex. Atlanta, GA"></ion-input>
+			<ion-input type="text" [(ngModel)]="locationCityState" placeholder="Ex. Atlanta, GA" name="citystate"></ion-input>
 		</ion-item>	
 		<ion-item>
 			<ion-label stacked>ZipCode</ion-label>
-			<ion-input type="number" [(ngModel)]="zipcode" ></ion-input>
+			<ion-input type="number" [(ngModel)]="zipcode" name="zip"></ion-input>
 		</ion-item>
 	  <ion-item>
 		  <ion-label stacked>Owned Platforms</ion-label>
@@ -60,7 +60,7 @@
 				<ion-option value="Nintendo 64">Nintendo 64</ion-option>
 				<ion-option value="Wii">Wii</ion-option>
 				<ion-option value="Wii U">Wii U</ion-option>
-				<ion-option value="Game Cube">Game Cube</ion-option>
+				<ion-option value="Gamecube">Gamecube</ion-option>
 				<ion-option value="Other">Other</ion-option>
 		  </ion-select>
 		</ion-item>

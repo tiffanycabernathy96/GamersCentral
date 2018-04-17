@@ -14,7 +14,8 @@ export class GamesPage {
 
   public allGames = [];
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
-    this.allGames = this.dataService.getGameData();
+    this.dataService.getGameData().then(games =>{this.allGames = games;});
+
   }
   delete(item)
   {
@@ -22,14 +23,16 @@ export class GamesPage {
   }
   ionViewWillEnter()
   {
-	  this.allGames = this.dataService.getGameData();
+	 this.dataService.getGameData().then(games =>{this.allGames = games;});
   }
   addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
       addModal.onDidDismiss((item) => {
         if (item) {
 			this.dataService.addGame(item);
-			this.allGames = this.dataService.getGameData();
+			this.allGames.push(item);
+			this.dataService.getGameData().then(games =>{this.allGames = games;});
+
         }
       });
       addModal.present();
@@ -39,7 +42,8 @@ export class GamesPage {
   {  
     let addModal = this.modalCtrl.create(EditGamePage, {item: item});
 	addModal.onDidDismiss( ()=> {
-		this.allGames = this.dataService.getGameData();
+		this.dataService.getGameData().then(games =>{this.allGames = games;});
+
     });
     addModal.present();
   }

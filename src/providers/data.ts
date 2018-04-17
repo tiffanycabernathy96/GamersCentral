@@ -62,8 +62,8 @@ export class Data {
 		}
 		);
 	}
-	
-	addConvention(item)
+	async addConvention(item)
+
 	{
 		const Convention = Parse.Object.extend('Convention');
 		let newConvention = new Convention();
@@ -81,9 +81,9 @@ export class Data {
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.set("picture", item.picture);
-		newConvention.set("latitude", item.latitude);
-		newConvention.set("longitude", item.longitude);
-		newConvention.save(null, {
+		//newConvention.set("latitude", String(item.latitude));
+		//newConvention.set("longitude", item.longitude);
+		await newConvention.save(null, {
 			success: function(newConvention)
 			{
 				console.log("A new convention was saved " + newConvention.get("name"));
@@ -110,12 +110,12 @@ export class Data {
 		newConvention.set("id", id);
 	}
 
-	getConventionData() {
+	async getConventionData() {
 		const Convention = Parse.Object.extend('Convention');
 		let query = new Parse.Query(Convention);
 		var items = [];
 		query.limit(1000);
-		query.find().then((conventions) => {
+		await query.find().then((conventions) => {
 		  console.log(conventions.length)
 		  for (var i = conventions.length-1; i >= 0; i--){
 			var myConvention = {
@@ -149,7 +149,7 @@ export class Data {
 		return items;
 	  }
 
-	addGame(item)
+	async addGame(item)
 	{
 		const Game = Parse.Object.extend('Game');
 		let newGame = new Game();
@@ -161,7 +161,7 @@ export class Data {
 		newGame.set("description", item.description);
 		newGame.set("gamePageUrl", item.gamePageUrl);
 		newGame.set("youtubeEmbed", item.youtubeEmbed)
-		newGame.save(null, {
+		await newGame.save(null, {
 			success: function(newGame)
 			{
 				
@@ -174,7 +174,7 @@ export class Data {
 		
 		let id:string = "";
 		let query = new Parse.Query(Game);
-		query.equalTo("name", item.title);
+		query.equalTo("title", item.title);
 		query.first({
 			success: function(data){
 				if(data){
@@ -187,19 +187,18 @@ export class Data {
 		newGame.set("id", id);
 	}
 
-	getGameData() {
+	async getGameData() {
 		const Game = Parse.Object.extend('Game');
 		let query = new Parse.Query(Game);
 		var items = [];
 		query.limit(1000);
-		query.find().then((games) => {
+		await query.find().then((games) => {
 		  for (var i = games.length-1; i >= 0; i--){
 			var myGame = {
 				id: games[i].id,
 				platforms: games[i].get("platforms"),
-				admins: games[i].get("admins"),
 				developer: games[i].get("developer"),
-				avgRating: games[i].get("avgRating"),
+				avgRating: games[i].get("AvgRating"),
 				steamEmbed: games[i].get("steamEmbed"),
 				title: games[i].get("title"),
 				tags: games[i].get("tags"),
@@ -265,18 +264,17 @@ export class Data {
 		gameInfo.first({
 			success: function(newGame){
 				if(newGame){
-					newGame.set('username', newInfo.platforms);
-					newGame.set('password', newInfo.developer);
-					newGame.set('email', newInfo.title);
-					newGame.set('facebook', newInfo.tags);
+					newGame.set('platforms', newInfo.platforms);
+					newGame.set('developer', newInfo.developer);
+					newGame.set('title', newInfo.title);
+					newGame.set('tags', newInfo.tags);
 					newGame.set('steamEmbed', newInfo.steamEmbed);
-					newGame.set('instagram', newInfo.description);
+					newGame.set('description', newInfo.description);
 					newGame.set('gamePageUrl', newInfo.gamePageUrl);
 					newGame.set('youtubeEmbed', newInfo.youtubeEmbed);
 					newGame.save(null, {
 						success: function(newGame)
 						{
-							console.log("Saved");
 						},
 						error: function(response, error)
 						{
@@ -290,6 +288,86 @@ export class Data {
 			}
 		}
 		);
+	}
+	async ratingExists(gameId): Promise<boolean>
+	{
+		let exists = true;
+		const Ratings = Parse.Object.extend('Rating');
+		let ratingQ = new Parse.Query(Ratings);
+		ratingQ.equalTo("User", this.currentUser);
+		await ratingQ.find().then((ratings) => {
+			for (var i = ratings.length-1; i >= 0; i--){
+				if(ratings[i].get("Game")==gameId)
+				{
+					exists= false;
+				}
+			}
+		});
+		return exists;
+	}
+	async addRating(gameId, ratingValue: Number)
+	{
+		const Rating = Parse.Object.extend('Rating');
+		let newRating = new Rating();
+		newRating.set("User", this.currentUser);
+		newRating.set("Game", gameId);
+		newRating.set("Rating", parseInt(ratingValue));
+		await newRating.save(null, {
+			success: function(savedRating)
+			{
+				
+			},
+			error: function(error)
+			{
+				alert(error.code+' Failed to Add Rating');
+			}
+		});
+		
+		let avgRate = 0;
+		let sum=0;
+		let numRatings = 0;
+		const NumberOfRatings = Parse.Object.extend('Rating');
+		let ratingCount = new Parse.Query(NumberOfRatings);
+		ratingCount.equalTo("Game", gameId);
+		ratingCount.find().then((ratings) => {
+			for (var i = ratings.length-1; i >= 0; i--){
+				sum = sum + parseInt(ratings[i].get("Rating"));
+			}
+			numRatings = ratings.length;
+			
+		});
+		sum = sum+parseInt(ratingValue);
+		 if(numRatings == 0 || numRatings == undefined)
+		 {
+			 avgRate = sum;
+		 }
+		 else{
+			 avgRate = parseInt(sum/numRatings);
+		 }
+		const Game = Parse.Object.extend('Game');
+		let gameInfo = new Parse.Query(Game);
+		gameInfo.equalTo("objectId", gameId);
+		gameInfo.first({
+			success: function(theGame){
+				if(theGame){
+					theGame.set('AvgRating', avgRate);
+					theGame.save(null, {
+						success: function(theGame)
+						{
+						},
+						error: function(response, error)
+						{
+						}
+					});
+				}
+			},
+			error: function(error){
+				console.log("Error: " + error.code);
+			}
+		}
+		);
+		
+		return avgRate;
 	}
 	/*deleteAOrder(newOrders, item)
 	{
