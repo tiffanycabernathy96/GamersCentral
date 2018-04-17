@@ -7,21 +7,21 @@
 
 <ion-content padding >
 
-		<div>
+		<div *ngIf = "youtubeEmbed">
 			<iframe width="100%" height="315" [src]="youtubeEmbed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 		</div>
-		<div>
+		<div *ngIf = "avgRating">
 			<h5>Avg. Rating:</h5> <p style="color:white;">{{avgRating}}%</p>
 		</div>
 		
-		<div>
+		<div *ngIf = "developer">
 			<h5>Developer:</h5> <p style="color:white;">{{developer}}</p>
 		</div>
-		<div id="description">
+		<div id="description" *ngIf = "description">
 			<h3 style="text-align:center;">Description</h3>
 			<p style="color:white; text-align:center;">{{description}}</p>
 		</div>
-		<div>
+		<div *ngIf = "steamEmbed">
 			<iframe [src]="steamEmbed" width="100%" frameborder="0" style="border:0" height="190"></iframe>
 		</div>
 		
@@ -40,7 +40,7 @@
 				</li>
 			</ul>
 		</div>
-		<button ng-if="gamePageUrl != undefined" ion-button color="danger" id="gamePage"><a href={{gamePageUrl}}>Game Page Url</a></button>
+		<button *ngIf = "gamePageUrl" ion-button color="danger" id="gamePage"><a href={{gamePageUrl}}>Game Page Url</a></button>
 		<button ion-button color="danger" id="rateGame" (click)="rate()"  *ngIf="rateDisable">Rate Game</button>
 
 </ion-content>
