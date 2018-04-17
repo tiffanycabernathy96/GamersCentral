@@ -28,7 +28,7 @@
         <ion-list>
           <ion-item *ngFor="let item of conventions" (click)="viewConventionItem(item)">
             <ion-thumbnail item-start>
-                <img height="15" width="15" src="assets/imgs/Dragon-Con-Logo.png" />
+                <img *ngIf="item.name == 'Dragon Con'" height="15" width="15" src="assets/imgs/Dragon-Con-Logo.png" />
             </ion-thumbnail>
 				    <h2 style="color: #ffffff">{{item.name}}</h2>
 				    <p>Location: {{item.locationCityState}}, {{item.zipcode}}</p>
