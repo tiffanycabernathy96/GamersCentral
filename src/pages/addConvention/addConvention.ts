@@ -27,6 +27,7 @@ export class AddConventionPage {
 	picture;
 	latitude;
 	longitude;
+	location: any;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data, public modalCtrl: ModalController, private alertCtrl: AlertController) {
 
@@ -34,6 +35,8 @@ export class AddConventionPage {
 	}
 	
 	save() {
+
+		this.setLatLon();
 		
     let newConvention = {
 		admins: this.admins,
@@ -67,12 +70,16 @@ export class AddConventionPage {
 
     modal.onDidDismiss((location) => {
 				console.log(location);
-				this.latitude = location.lat;
-				this.longitude = location.lng;
+				this.location = location;
     });
 
-    modal.present();   
+		modal.present();   
+		
+	}
 
+setLatLon() {
+	this.latitude = this.location.lat;
+	this.longitude = this.location.lng;
 }
 
 alertHelp()

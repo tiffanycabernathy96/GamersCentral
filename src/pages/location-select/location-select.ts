@@ -56,8 +56,6 @@ selectPlace(place){
       name: place.name
   };
 
-  
-
   this.placesService.getDetails({placeId: place.place_id}, (details) => {
 
       this.zone.run(() => {
@@ -111,7 +109,6 @@ searchPlace(){
 }
 
 save(){
-  
 
   this.viewCtrl.dismiss(this.location);
 }

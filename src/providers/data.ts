@@ -62,6 +62,7 @@ export class Data {
 		}
 		);
 	}
+	
 	addConvention(item)
 	{
 		const Convention = Parse.Object.extend('Convention');
@@ -80,12 +81,13 @@ export class Data {
 		newConvention.set("zipcode", item.zipcode);
 		newConvention.set("FaQ", item.faq);
 		newConvention.set("picture", item.picture);
-		newConvention.set("latitude", String(item.latitude));
+		newConvention.set("latitude", item.latitude);
 		newConvention.set("longitude", item.longitude);
 		newConvention.save(null, {
 			success: function(newConvention)
 			{
-				console.log("Latitude: " + newConvention.latitude);	
+				console.log("A new convention was saved " + newConvention.get("name"));
+				console.log("Latitude: " + newConvention.get("latitude"));	
 			},
 			error: function(newConvention, error)
 			{
@@ -132,7 +134,9 @@ export class Data {
 				locationCityState: conventions[i].get("locationCityState"),
 				zipcode: conventions[i].get("zipcode"),
 				faq: conventions[i].get("FaQ"),
-				picture: conventions[i].get("picture")
+				picture: conventions[i].get("picture"),
+				latitude: conventions[i].get("latitude"),
+				longitude: conventions[i].get("longitude")
 			}
 			items.push(myConvention);
 		  }
