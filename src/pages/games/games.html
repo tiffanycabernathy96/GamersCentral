@@ -17,6 +17,11 @@
             <ion-list>
               <ion-item-sliding *ngFor="let item of allGames">
                 <ion-item (click)="viewItem(item)">
+                    <ion-thumbnail item-start>
+                        <img *ngIf="item.title == 'Far Cry 4'" height="15" width="15" src="assets/imgs/FarCry4-Logo.png" />
+                        <img *ngIf="item.title == 'Far Cry 3'" height="15" width="15" src="assets/imgs/FarCry3-Logo.png" />
+                        <img *ngIf="item.title == 'Dota 2'" height="15" width="15" src="assets/imgs/Dota2-Logo.jpg" />
+                      </ion-thumbnail>
                     <h2 style="color: #ffffff">{{item.title}}</h2>
                     <p>Developer: {{item.developer}}</p>
                     <p>Game Page URL: {{item.gamePageUrl}}</p>

@@ -46,7 +46,9 @@
         <ion-list>
             <ion-item *ngFor="let item of games" (click)="viewGameItem(item)">
               <ion-thumbnail item-start>
-                <img height="15" width="15" src="assets/imgs/FarCry4-Logo.png" />
+                  <img *ngIf="item.title == 'Far Cry 4'" height="15" width="15" src="assets/imgs/FarCry4-Logo.png" />
+                  <img *ngIf="item.title == 'Far Cry 3'" height="15" width="15" src="assets/imgs/FarCry3-Logo.png" />
+                  <img *ngIf="item.title == 'Dota 2'" height="15" width="15" src="assets/imgs/Dota2-Logo.jpg" />
               </ion-thumbnail>
               <h2 style="color: #ffffff">{{item.title}}</h2>
               <p>Developer: {{item.developer}}</p>
