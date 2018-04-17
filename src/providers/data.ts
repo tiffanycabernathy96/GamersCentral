@@ -86,7 +86,7 @@ export class Data {
 		await newConvention.save(null, {
 			success: function(newConvention)
 			{
-	
+
 			},
 			error: function(newConvention, error)
 			{
