@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable'
-
+import {} from '@types/googlemaps';
 /*
   Generated class for the ConnectivityServiceProvider provider.
 

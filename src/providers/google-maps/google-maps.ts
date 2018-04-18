@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ConnectivityServiceProvider } from '../connectivity-service/connectivity-service';
-
+import {} from '@types/googlemaps';
 /*
   Generated class for the GoogleMapsProvider provider.
 
