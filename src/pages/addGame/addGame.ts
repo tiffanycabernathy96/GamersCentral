@@ -16,6 +16,7 @@ export class AddGamePage {
 	steamEmbed;
 	gamePageUrl;
 	youtubeEmbed;
+	iconLogo;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data) {
 
@@ -30,7 +31,8 @@ export class AddGamePage {
 		description: this.description,
 		steamEmbed: this.steamEmbed,
 		gamePageUrl: this.gamePageUrl,
-		youtubeEmbed: this.youtubeEmbed
+		youtubeEmbed: this.youtubeEmbed,
+		iconLogo: this.iconLogo
     };
 
 		//this.dataService.addGame(newGame);

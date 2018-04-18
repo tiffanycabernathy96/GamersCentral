@@ -28,4 +28,7 @@ page-editGame{
 	input[type=number]:before {
 		content: "$";
 	}
+	ion-content{
+		height: 92%
+	}
 }

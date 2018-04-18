@@ -28,6 +28,7 @@ export class EditConventionPage {
 	latitude;
 	longitude;
 	location: any;
+	iconLogo;
   constructor(public params: NavParams, public view: ViewController, public dataService: Data, public modalCtrl: ModalController) {
 	this.id = params.get('item').id;
 	this.name = params.get('item').name;
@@ -45,7 +46,8 @@ export class EditConventionPage {
 	this.zipcode = params.get('item').zipcode;
 	this.picture = params.get('item').picture;
 	this.latitude = params.get('item').latitude,
-	this.longitude = params.get('item').longitude
+	this.longitude = params.get('item').longitude,
+	this.iconLogo = params.get('item').iconLogo
   }
 	ionViewWillEnter()
 	{
@@ -73,7 +75,8 @@ export class EditConventionPage {
 			zipcode: this.zipcode,
 			picture: this.picture,
 			latitude: this.latitude,
-			longitude: this.longitude
+			longitude: this.longitude,
+			iconLogo: this.iconLogo
     };
 		this.dataService.saveConvention(newConvention);
 		this.view.dismiss();

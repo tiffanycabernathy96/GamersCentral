@@ -44,7 +44,10 @@
 		  <ion-label >Convention Logo Url</ion-label>
 		  <ion-input type="url" required pattern="https?://.+" [(ngModel)]="picture" placeholder = "http://"></ion-input>
 		</ion-item>
-
+		<ion-item>
+			<ion-label>Convention Icon Url</ion-label>
+			<ion-input type="url" pattern="https?://.+" [(ngModel)]="iconLogo" placeholder = "http://"></ion-input>
+		</ion-item>
 		<ion-item>
 			<ion-label >Map Url</ion-label>
 			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="mapUrl" placeholder = "http://"></ion-input>

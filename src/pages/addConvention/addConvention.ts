@@ -28,6 +28,7 @@ export class AddConventionPage {
 	latitude;
 	longitude;
 	location: any;
+	iconLogo;
 	
   constructor(public navCtrl: NavController, public view: ViewController, public dataService: Data, public modalCtrl: ModalController, private alertCtrl: AlertController) {
 
@@ -38,7 +39,7 @@ export class AddConventionPage {
 
 		this.setLatLon();
 		
-    let newConvention = {
+    let newConvention = { 
 		admins: this.admins,
 		name: this.name,
 		mapUrl: this. mapUrl,
@@ -55,7 +56,8 @@ export class AddConventionPage {
 		zipcode: this.zipcode,
 		picture: this.picture,
 		latitude: this.latitude,
-		longitude: this.longitude
+		longitude: this.longitude,
+		iconLogo: this.iconLogo
     };
 
     this.view.dismiss(newConvention);

@@ -32,6 +32,10 @@
 			<ion-input type="url" required pattern="https?://.+" [(ngModel)]="youtubeEmbed" placeholder = "http://"></ion-input>
 		</ion-item>
 		<ion-item>
+			<ion-label>Game Icon Url</ion-label>
+			<ion-input type="url" pattern="https?://.+" [(ngModel)]="iconLogo" placeholder = "http://"></ion-input>
+		</ion-item>
+		<ion-item>
 		  <ion-label floating>Game Platform</ion-label>
 		  <ion-select type="text" required multiple="true" [(ngModel)]="platforms">
 				<ion-option value="Playstation 4">Playstation 4</ion-option>

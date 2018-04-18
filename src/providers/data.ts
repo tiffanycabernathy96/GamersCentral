@@ -83,6 +83,7 @@ export class Data {
 		newConvention.set("picture", item.picture);
 		newConvention.set("lat", item.latitude);
 		newConvention.set("lng", item.longitude);
+		newConvention.set("iconLogo", item.iconLogo);
 		await newConvention.save(null, {
 			success: function(newConvention)
 			{
@@ -135,7 +136,8 @@ export class Data {
 				faq: conventions[i].get("FaQ"),
 				picture: conventions[i].get("picture"),
 				latitude: conventions[i].get("lat"),
-				longitude: conventions[i].get("lng")
+				longitude: conventions[i].get("lng"),
+				iconLogo: conventions[i].get("iconLogo")
 			}
 			items.push(myConvention);
 		  }
@@ -159,7 +161,8 @@ export class Data {
 		newGame.set("tags", item.tags);
 		newGame.set("description", item.description);
 		newGame.set("gamePageUrl", item.gamePageUrl);
-		newGame.set("youtubeEmbed", item.youtubeEmbed)
+		newGame.set("youtubeEmbed", item.youtubeEmbed);
+		newGame.set("iconLogo", item.iconLogo);
 		await newGame.save(null, {
 			success: function(newGame)
 			{
@@ -203,7 +206,8 @@ export class Data {
 				tags: games[i].get("tags"),
 				description: games[i].get("description"),
 				gamePageUrl: games[i].get("gamePageUrl"),
-				youtubeEmbed: games[i].get("youtubeEmbed")
+				youtubeEmbed: games[i].get("youtubeEmbed"),
+				iconLogo: games[i].get("iconLogo")
 			}
 			items.push(myGame);
 		  }
@@ -239,6 +243,7 @@ export class Data {
 					theConvention.set('picture', newInfo.picture);
 					theConvention.set('lat', newInfo.latitude);
 					theConvention.set('lng', newInfo.longitude);
+					theConvention.set('iconLogo', newInfo.iconLogo);
 					theConvention.save(null, {
 						success: function(newConventionCreated)
 						{
@@ -273,6 +278,7 @@ export class Data {
 					newGame.set('description', newInfo.description);
 					newGame.set('gamePageUrl', newInfo.gamePageUrl);
 					newGame.set('youtubeEmbed', newInfo.youtubeEmbed);
+					newGame.set('iconLogo', newInfo.iconLogo);
 					newGame.save(null, {
 						success: function(newGame)
 						{
