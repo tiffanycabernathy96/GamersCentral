@@ -8,11 +8,73 @@ export class Data {
 	private parseJSKey: string = 'jyIut17JVHHJFTlOVPqqTdhlQ00GUd6tBpOLYrbZ';
 	private parseServerUrl: string= 'https://parseapi.back4app.com/';
 	public currentUser;
-
+	public currentGames =[];
+	public currentConventions =[];
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
-
+		
+		const ConventionQ = Parse.Object.extend('Convention');
+		let cquery = new Parse.Query(ConventionQ);
+		cquery.limit(1000);
+		var self =this;
+		cquery.find({
+			success: function(conventions) {
+			for (var i = conventions.length-1; i >= 0; i--){
+				var myConvention = {
+					id: conventions[i].id,
+					admins: conventions[i].get("admins"),
+					name: conventions[i].get("name"),
+					mapUrl: conventions[i].get("mapUrl"),
+					vendorsUrl: conventions[i].get("vendorsUrl"),
+					bracketsUrl: conventions[i].get("bracketsUrl"),
+					ticketsUrl: conventions[i].get("ticketsUrl"),
+					mainPage: conventions[i].get("mainPage"),
+					locationV: conventions[i].get("locationV"),
+					scheduleUrl: conventions[i].get("scheduleUrl"),
+					storePageUrl: conventions[i].get("storePageUrl"),
+					description: conventions[i].get("Description"),
+					locationCityState: conventions[i].get("locationCityState"),
+					zipcode: conventions[i].get("zipcode"),
+					faq: conventions[i].get("FaQ"),
+					picture: conventions[i].get("picture"),
+					latitude: conventions[i].get("lat"),
+					longitude: conventions[i].get("lng"),
+					iconLogo: conventions[i].get("iconLogo")
+				}
+				self.currentConventions.push(myConvention);
+			}
+			},
+			error: function(error){
+				alert("it did not work");
+			}
+		});
+		const GameQ = Parse.Object.extend('Game');
+		let gquery = new Parse.Query(GameQ);
+		gquery.limit(1000);
+		gquery.find({
+			success: function(games) {
+			for (var i = games.length-1; i >= 0; i--){
+				var myGame = {
+					id: games[i].id,
+					platforms: games[i].get("platforms"),
+					developer: games[i].get("developer"),
+					avgRating: games[i].get("AvgRating"),
+					steamEmbed: games[i].get("steamEmbed"),
+					title: games[i].get("title"),
+					tags: games[i].get("tags"),
+					description: games[i].get("description"),
+					gamePageUrl: games[i].get("gamePageUrl"),
+					youtubeEmbed: games[i].get("youtubeEmbed"),
+					iconLogo: games[i].get("iconLogo")
+				}
+				self.currentGames.push(myGame);
+			}
+			},
+			error: function(error){
+				alert("it did not work");
+			}
+		});
 	}
 	setCurrentUser(user)
 	{
@@ -95,59 +157,83 @@ export class Data {
 			}
 		});
 		
-		let id:string = "";
-		let query = new Parse.Query(Convention);
-		query.equalTo("name", item.name);
-		query.first({
-			success: function(data){
-				if(data){
-					id = data.id;
-				} else {
-					return null;
+		this.currentConventions = [];
+		const ConventionQ = Parse.Object.extend('Convention');
+		let cquery = new Parse.Query(ConventionQ);
+		cquery.limit(1000);
+		var self =this;
+		cquery.find({
+			success: function(conventions) {
+			for (var i = conventions.length-1; i >= 0; i--){
+				var myConvention = {
+					id: conventions[i].id,
+					admins: conventions[i].get("admins"),
+					name: conventions[i].get("name"),
+					mapUrl: conventions[i].get("mapUrl"),
+					vendorsUrl: conventions[i].get("vendorsUrl"),
+					bracketsUrl: conventions[i].get("bracketsUrl"),
+					ticketsUrl: conventions[i].get("ticketsUrl"),
+					mainPage: conventions[i].get("mainPage"),
+					locationV: conventions[i].get("locationV"),
+					scheduleUrl: conventions[i].get("scheduleUrl"),
+					storePageUrl: conventions[i].get("storePageUrl"),
+					description: conventions[i].get("Description"),
+					locationCityState: conventions[i].get("locationCityState"),
+					zipcode: conventions[i].get("zipcode"),
+					faq: conventions[i].get("FaQ"),
+					picture: conventions[i].get("picture"),
+					latitude: conventions[i].get("lat"),
+					longitude: conventions[i].get("lng"),
+					iconLogo: conventions[i].get("iconLogo")
 				}
+				self.currentConventions.push(myConvention);
+			}
+			},
+			error: function(error){
+				alert("it did not work");
 			}
 		});
-		newConvention.set("id", id);
 	}
 
-	async getConventionData() {
-		const Convention = Parse.Object.extend('Convention');
-		let query = new Parse.Query(Convention);
-		var items = [];
-		query.limit(1000);
-		await query.find().then((conventions) => {
-		  console.log(conventions.length)
-		  for (var i = conventions.length-1; i >= 0; i--){
-			var myConvention = {
-				id: conventions[i].id,
-				admins: conventions[i].get("admins"),
-				name: conventions[i].get("name"),
-				mapUrl: conventions[i].get("mapUrl"),
-				vendorsUrl: conventions[i].get("vendorsUrl"),
-				bracketsUrl: conventions[i].get("bracketsUrl"),
-				ticketsUrl: conventions[i].get("ticketsUrl"),
-				mainPage: conventions[i].get("mainPage"),
-				locationV: conventions[i].get("locationV"),
-				scheduleUrl: conventions[i].get("scheduleUrl"),
-				storePageUrl: conventions[i].get("storePageUrl"),
-				description: conventions[i].get("Description"),
-				locationCityState: conventions[i].get("locationCityState"),
-				zipcode: conventions[i].get("zipcode"),
-				faq: conventions[i].get("FaQ"),
-				picture: conventions[i].get("picture"),
-				latitude: conventions[i].get("lat"),
-				longitude: conventions[i].get("lng"),
-				iconLogo: conventions[i].get("iconLogo")
-			}
-			items.push(myConvention);
-		  }
-		  return items;
+	getConventionData() {
+		return this.currentConventions;
+		// const Convention = Parse.Object.extend('Convention');
+		// let query = new Parse.Query(Convention);
+		// var items = [];
+		// query.limit(1000);
+		// await query.find().then((conventions) => {
+		  // console.log(conventions.length)
+		  // for (var i = conventions.length-1; i >= 0; i--){
+			// var myConvention = {
+				// id: conventions[i].id,
+				// admins: conventions[i].get("admins"),
+				// name: conventions[i].get("name"),
+				// mapUrl: conventions[i].get("mapUrl"),
+				// vendorsUrl: conventions[i].get("vendorsUrl"),
+				// bracketsUrl: conventions[i].get("bracketsUrl"),
+				// ticketsUrl: conventions[i].get("ticketsUrl"),
+				// mainPage: conventions[i].get("mainPage"),
+				// locationV: conventions[i].get("locationV"),
+				// scheduleUrl: conventions[i].get("scheduleUrl"),
+				// storePageUrl: conventions[i].get("storePageUrl"),
+				// description: conventions[i].get("Description"),
+				// locationCityState: conventions[i].get("locationCityState"),
+				// zipcode: conventions[i].get("zipcode"),
+				// faq: conventions[i].get("FaQ"),
+				// picture: conventions[i].get("picture"),
+				// latitude: conventions[i].get("lat"),
+				// longitude: conventions[i].get("lng"),
+				// iconLogo: conventions[i].get("iconLogo")
+			// }
+			// items.push(myConvention);
+		  // }
+		  // return items;
 	
-		}, (error) => {
+		// }, (error) => {
 		  
-		});
+		// });
 	
-		return items;
+		// return items;
 	  }
 
 	async addGame(item)
@@ -174,50 +260,65 @@ export class Data {
 			}
 		});
 		
-		let id:string = "";
-		let query = new Parse.Query(Game);
-		query.equalTo("title", item.title);
-		query.first({
-			success: function(data){
-				if(data){
-					id = data.id;
-				} else {
-					return null;
+		this.currentGames = [];
+		const GameQ = Parse.Object.extend('Game');
+		let gquery = new Parse.Query(GameQ);
+		gquery.limit(1000);
+		gquery.find({
+			success: function(games) {
+			for (var i = games.length-1; i >= 0; i--){
+				var myGame = {
+					id: games[i].id,
+					platforms: games[i].get("platforms"),
+					developer: games[i].get("developer"),
+					avgRating: games[i].get("AvgRating"),
+					steamEmbed: games[i].get("steamEmbed"),
+					title: games[i].get("title"),
+					tags: games[i].get("tags"),
+					description: games[i].get("description"),
+					gamePageUrl: games[i].get("gamePageUrl"),
+					youtubeEmbed: games[i].get("youtubeEmbed"),
+					iconLogo: games[i].get("iconLogo")
 				}
+				this.currentGames.push(myGame);
+			}
+			},
+			error: function(error){
+				alert("it did not work");
 			}
 		});
-		newGame.set("id", id);
 	}
 
-	async getGameData() {
-		const Game = Parse.Object.extend('Game');
-		let query = new Parse.Query(Game);
-		var items = [];
-		query.limit(1000);
-		await query.find().then((games) => {
-		  for (var i = games.length-1; i >= 0; i--){
-			var myGame = {
-				id: games[i].id,
-				platforms: games[i].get("platforms"),
-				developer: games[i].get("developer"),
-				avgRating: games[i].get("AvgRating"),
-				steamEmbed: games[i].get("steamEmbed"),
-				title: games[i].get("title"),
-				tags: games[i].get("tags"),
-				description: games[i].get("description"),
-				gamePageUrl: games[i].get("gamePageUrl"),
-				youtubeEmbed: games[i].get("youtubeEmbed"),
-				iconLogo: games[i].get("iconLogo")
-			}
-			items.push(myGame);
-		  }
-		  return items;
+	getGameData() {
+		return this.currentGames;
+		// const Game = Parse.Object.extend('Game');
+		// let query = new Parse.Query(Game);
+		// var items = [];
+		// query.limit(1000);
+		// await query.find().then((games) => {
+		  // for (var i = games.length-1; i >= 0; i--){
+			// var myGame = {
+				// id: games[i].id,
+				// platforms: games[i].get("platforms"),
+				// developer: games[i].get("developer"),
+				// avgRating: games[i].get("AvgRating"),
+				// steamEmbed: games[i].get("steamEmbed"),
+				// title: games[i].get("title"),
+				// tags: games[i].get("tags"),
+				// description: games[i].get("description"),
+				// gamePageUrl: games[i].get("gamePageUrl"),
+				// youtubeEmbed: games[i].get("youtubeEmbed"),
+				// iconLogo: games[i].get("iconLogo")
+			// }
+			// items.push(myGame);
+		  // }
+		  // return items;
 	
-		}, (error) => {
+		// }, (error) => {
 		  
-		});
+		// });
 	
-		return items; 
+		// return items; 
 	  }
 	saveConvention(newInfo)
 	{
@@ -261,6 +362,13 @@ export class Data {
 			}
 		}
 		);
+		for(let i = 0; i < this.currentConventions.length; i++)
+		{
+			if(this.currentConventions[i].id == newInfo.id)
+			{
+				this.currentConventions[i] = newInfo;
+			}
+		}
 	}
 	saveGame(newInfo)
 	{
@@ -295,6 +403,13 @@ export class Data {
 			}
 		}
 		);
+		for(let i = 0; i < this.currentGames.length; i++)
+		{
+			if(this.currentGames[i].id == newInfo.id)
+			{
+				this.currentGames[i] = newInfo;
+			}
+		}
 	}
 	async ratingExists(gameId): Promise<boolean>
 	{
@@ -376,80 +491,7 @@ export class Data {
 		
 		return avgRate;
 	}
-	/*deleteAOrder(newOrders, item)
-	{
-		const Order = Parse.Object.extend('Order');
-		this.orders = newOrders;
-		let queryDelete = new Parse.Query(Order);
-		queryDelete.equalTo("objectId", item.orderId);
-		queryDelete.first({
-		success: function(data){
-			if(data){
-				data.destroy();
-			} else {
-				return null;
-			}
-		}
-		});
-	}
-	saveOrder(item)
-	{
-		const Order = Parse.Object.extend('Order');
-		let newOrderI = new Order();
-		var numQty=Number (item.qty);
-		var numCost=Number (item.totalCost);
-		newOrderI.set("menuId", item.menuId);
-		newOrderI.set("totalCost", numCost);
-		newOrderI.set("itemQty", numQty);
-		newOrderI.save(null, {
-			success: function(newOrderI)
-			{
-				
-			},
-			error: function(newOrderI, error)
-			{
-				alert(error.code+' Failed to Add Order');
-			}
-		});
-		let id:string = "";
-		let queryOrder = new Parse.Query(Order);
-		queryOrder.equalTo("menuId", item.menuId);
-		queryOrder.first({
-			success: function(data){
-				if(data){
-					id = data.id;
-				} else {
-					return null;
-				}
-			}
-		});
-		const Menu = Parse.Object.extend('Menu');
-		let queryMenu = new Parse.Query(Menu);
-		queryMenu.equalTo("objectId", item.menuId);
-		queryMenu.first({
-			success: function(menu){
-			var newOrder = 
-			{
-				name:menu.attributes.name, 
-				price:menu.attributes.price, 
-				category:menu.attributes.category, 
-				url:menu.attributes.url, 
-				description:menu.attributes.description,
-				menuId:menu.id, 
-				orderId:id,
-				qty: numQty, 
-				totalCost: numCost
-			}
-			this.orders.push(newOrder);
-			}
-		});
-		
-	}
-
-	getEntreesData()
-	{
-		return this.entreeItems;
-	}
+	/*
 	deleteEntree(items, data)
 	{
 		this.allItems.splice(this.allItems.indexOf(data), 1);
@@ -467,130 +509,6 @@ export class Data {
 		}
 	});
 	}
-	getSidesData()
-	{
-		return this.sideItems;
-	}
-	deleteSide(items, data)
-	{
-		this.allItems.splice(this.allItems.indexOf(data), 1);
-		const Menu = Parse.Object.extend('Menu');
-		this.sideItems = items;
-		let query = new Parse.Query(Menu);
-		query.equalTo("objectId", data.menuId);
-		query.first({
-		success: function(data){
-			if(data){
-				data.destroy();
-			} else {
-				return null;
-			}
-		}
-		});
-	}
-	getDessertsData()
-	{
-		return this.dessertItems;
-	}
-	deleteDessert(items, data)
-	{
-		this.allItems.splice(this.allItems.indexOf(data), 1);
-		const Menu = Parse.Object.extend('Menu');
-		this.dessertItems = items;
-		let query = new Parse.Query(Menu);
-		query.equalTo("objectId", data.menuId);
-		query.first({
-		success: function(data){
-			if(data){
-				data.destroy();
-			} else {
-				return null;
-			}
-		}
-	});
-	}
-	getDrinksData()
-	{
-		return this.drinkItems;
-	}
-	deleteDrink(items, data)
-	{
-		this.allItems.splice(this.allItems.indexOf(data), 1);
-		const Menu = Parse.Object.extend('Menu');
-		this.drinkItems = items;
-		let query = new Parse.Query(Menu);
-		query.equalTo("objectId", data.menuId);
-		query.first({
-		success: function(data){
-			if(data){
-				data.destroy();
-			} else {
-				return null;
-			}
-		}
-		});
-	}
-	getAllData()
-	{
-		return this.allItems;
-	}
-	clearItems()
-	{
-		this.allItems = [];
-		this.entreeItems = [];
-		this.sideItems = [];
-		this.dessertItems = [];
-		this.drinkItems = [];
-	}
-	saveItems(item)
-	{
-		this.allItems.push(item);
-
-		if(item.category == "Entree")
-		{
-			this.entreeItems.push(item);
-		}
-		if(item.category == "Side Dish")
-		{
-		  this.sideItems.push(item);
-		}
-		if(item.category == "Dessert")
-		{
-		  this.dessertItems.push(item);
-		}
-		if(item.category == "Drink")
-		{
-		  this.drinkItems.push(item);
-		}
-
-		const Menu = Parse.Object.extend('Menu');
-		let saveQuery = new Parse.Query(Menu);
-		saveQuery.equalTo("objectId", item.menuId);
-		saveQuery.first({
-			success: function(menuObject){
-				if(menuObject){
-					menuObject.set('name', item.name);
-					menuObject.set('price', parseFloat(item.price));
-					menuObject.set('category', item.category);
-					menuObject.set('photoUrl', item.url);
-					menuObject.set('description', item.description);
-					menuObject.save(null, {
-						success: function(newObj)
-						{
-							console.log("Saved");
-						},
-						error: function(response, error)
-						{
-							alert(error.code+' Failed to Add Item ' + error.message);
-						}
-					});
-				}
-			},
-			error: function(error){
-				console.log("Error: " + error.code);
-			}
-		}
-		);
-		return;
-	}*/
+	*/
+	
 }
