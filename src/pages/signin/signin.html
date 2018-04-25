@@ -1,27 +1,55 @@
 <ion-content padding-top>
 
-  <p class="logo">
-    <img src="../../assets/imgs/logohead.svg" />
-  </p>
+	<p class="logo">
+	<img src="../../assets/imgs/logohead.svg" />
+	</p>
 
-  <form (submit)="doSignin()">
-    <ion-list inset padding>
+	<form >
+		<ion-list inset padding>
 
-      <ion-item>
-        <ion-label stacked>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-      </ion-item>
-      
-      <div padding>
-        <button ion-button color="accent" block>Login</button>
-        <p style="text-align: center">Don't Have an Account? <a [navPush]="registerPage">Signup</a></p>
-      </div>
+			<ion-item>
+				<ion-label stacked>Username</ion-label>
+				<ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Password</ion-label>
+				<ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+			</ion-item>
+			
+			<!-- <div *ngIf="isLoggedIn; else facebookLogin"> -->
+			<!-- <h2>Hi, {{users.name}} ({{users.email}})</h2> -->
+			<!-- <p> -->
+			<!-- Gender: {{users.gender}} -->
+			<!-- </p> -->
+			<!-- <p> -->
+			<!-- <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" /> -->
+			<!-- </p> -->
+			<!-- <p> -->
+			<!-- <button ion-button icon-right (click)="logout()"> -->
+			<!-- Logout -->
+			<!-- </button> -->
+			<!-- </p> -->
+			<!-- </div> -->
+			<!-- <ng-template #facebookLogin> -->
+				<!-- <button ion-button icon-right (click)="login()"> -->
+					<!-- Login with -->
+					<!-- <ion-icon name="logo-facebook"></ion-icon> -->
+				<!-- </button> -->
+			<!-- </ng-template> -->
+			
+			
 
-    </ion-list>
-    </form>
+			
+			<div padding>
+				<button ion-button icon-right (click)="login()" block>
+					Login with
+					<ion-icon name="logo-facebook"></ion-icon>
+				</button>
+				<button ion-button color="accent" block (click)="doSignin()">Login</button>
+				<p style="text-align: center">Don't Have an Account? <a [navPush]="registerPage">Signup</a></p>
+			</div>
+
+		</ion-list>
+	</form>
 
 </ion-content>
