@@ -20,8 +20,19 @@
         <button ion-button color="accent" block>Login</button>
         <p style="text-align: center">Don't Have an Account? <a [navPush]="registerPage">Signup</a></p>
       </div>
-
+      
     </ion-list>
     </form>
+
+    <div padding>
+      <button ion-button icon-right (click)="login()" block>
+        Login with
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+    </div>
+
+    <!--<ng-template #facebookLogin>
+      
+    </ng-template>-->
 
 </ion-content>

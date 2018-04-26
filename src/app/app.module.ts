@@ -28,6 +28,7 @@ import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { AgmCoreModule } from '@agm/core';
+import { Facebook } from '@ionic-native/facebook'
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { AgmCoreModule } from '@agm/core';
 	Network,
 	Geolocation,
 	HttpClientModule,
+	Facebook, 
 	{provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
