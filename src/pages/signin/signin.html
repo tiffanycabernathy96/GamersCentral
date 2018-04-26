@@ -4,7 +4,7 @@
     <img src="../../assets/imgs/logohead.svg" />
   </p>
 
-  <form (submit)="doSignin()">
+  <form>
     <ion-list inset padding>
 
       <ion-item>
@@ -17,7 +17,11 @@
       </ion-item>
       
       <div padding>
-        <button ion-button color="accent" block>Login</button>
+        <button ion-button color="accent" (click)="doSignin()" block>Login</button>
+        <button ion-button color="default" icon-right (click)="login()" block>
+          Login with
+          <ion-icon name="logo-facebook"></ion-icon>
+        </button>
         <p style="text-align: center">Don't Have an Account? <a [navPush]="registerPage">Signup</a></p>
       </div>
       
@@ -25,10 +29,7 @@
     </form>
 
     <div padding>
-      <button ion-button icon-right (click)="login()" block>
-        Login with
-        <ion-icon name="logo-facebook"></ion-icon>
-      </button>
+      
     </div>
 
     <!--<ng-template #facebookLogin>
