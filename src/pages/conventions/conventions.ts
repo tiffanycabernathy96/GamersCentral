@@ -15,7 +15,8 @@ export class ConventionsPage {
   public allConventions = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
-	this.dataService.getConventionData().then(conventions =>{this.allConventions = conventions;});
+	this.allConventions = this.dataService.getConventionData();
+	//this.dataService.getConventionData().then(conventions =>{this.allConventions = conventions;});
   
   }
   delete(item)
@@ -24,7 +25,8 @@ export class ConventionsPage {
   }
   ionViewWillEnter()
   {
-	  this.dataService.getConventionData().then(conventions =>{this.allConventions = conventions;});
+	  this.allConventions = this.dataService.getConventionData();
+	  //this.dataService.getConventionData().then(conventions =>{this.allConventions = conventions;});
   }
   addConvention() {
     let addModal = this.modalCtrl.create(AddConventionPage);
@@ -33,7 +35,8 @@ export class ConventionsPage {
       if (item) {
 		  self.dataService.addConvention(item);
 		  self.allConventions.push(item);
-		  self.dataService.getConventionData().then(conventions =>{self.allConventions = conventions;});
+		  self.allConventions = this.dataService.getConventionData();
+		  //self.dataService.getConventionData().then(conventions =>{self.allConventions = conventions;});
       }
     });
     addModal.present();
@@ -44,7 +47,8 @@ export class ConventionsPage {
     let addModal = this.modalCtrl.create(EditConventionPage, {item: item});
 	let self=this;
 	addModal.onDidDismiss( ()=> {
-		self.dataService.getConventionData().then(conventions =>{self.allConventions = conventions;});
+		self.allConventions = this.dataService.getConventionData();
+		//self.dataService.getConventionData().then(conventions =>{self.allConventions = conventions;});
     });
     addModal.present();
   }

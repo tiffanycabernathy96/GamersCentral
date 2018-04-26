@@ -23,9 +23,10 @@ export class HomePage {
   public gameSearchResults = [];
   
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
-
-    this.dataService.getConventionData().then(conventions =>{this.conventions = conventions;});
-    this.dataService.getGameData().then(games =>{this.games = games;});
+	this.conventions = this.dataService.getConventionData();
+	this.games = this.dataService.getGameData();
+    //this.dataService.getConventionData().then(conventions =>{this.conventions = conventions;});
+    //this.dataService.getGameData().then(games =>{this.games = games;});
 
   }
 
@@ -64,8 +65,10 @@ onInput(event)
 }
   ionViewWillEnter()
   {
-	  this.dataService.getConventionData().then(conventions =>{this.conventions = conventions;});
-		this.dataService.getGameData().then(games =>{this.games = games;});
+	  this.conventions = this.dataService.getConventionData();
+	this.games = this.dataService.getGameData();
+	  //this.dataService.getConventionData().then(conventions =>{this.conventions = conventions;});
+		//this.dataService.getGameData().then(games =>{this.games = games;});
   }
   viewConventionItem(item)
   {
