@@ -10,6 +10,9 @@ export class Data {
 	public currentUser;
 	public currentGames =[];
 	public currentConventions =[];
+	public ratedGames =[];
+	public createdGames=[];
+	public createdConventions=[];
 	constructor(public storage: Storage) {
 		Parse.initialize(this.parseAppId, this.parseJSKey);
 		Parse.serverURL = this.parseServerUrl;
@@ -23,7 +26,6 @@ export class Data {
 			for (var i = conventions.length-1; i >= 0; i--){
 				var myConvention = {
 					id: conventions[i].id,
-					admins: conventions[i].get("admins"),
 					name: conventions[i].get("name"),
 					mapUrl: conventions[i].get("mapUrl"),
 					vendorsUrl: conventions[i].get("vendorsUrl"),
@@ -76,17 +78,73 @@ export class Data {
 			}
 		});
 	}
-	setCurrentUser(user)
+	async setCurrentUser(user)
 	{
 		if(user){
+			let gameIdsR = [];
+			let gameIdsO = [];
+			let conventionIdsO = [];
 			this.currentUser = user;
+			const Ratings = Parse.Object.extend('Rating');
+			let ratingQ = new Parse.Query(Ratings);
+			ratingQ.equalTo("User", this.currentUser);
+			await ratingQ.find().then((ratings) => {
+			for (var i = ratings.length-1; i >= 0; i--){
+				gameIdsR.push(ratings[i].get("Game"));
+			}
+			});
+			const conAdmin = Parse.Object.extend('ConventionAdmin');
+			let adminCQ = new Parse.Query(conAdmin);
+			adminCQ.equalTo("userId", this.currentUser.id);
+			await adminCQ.find().then((conventions) => {
+			for (var i = conventions.length-1; i >= 0; i--){
+				conventionIdsO.push(conventions[i].get("conventionId"));
+			}
+			});
+			const gameAdmin = Parse.Object.extend('GameAdmin');
+			let adminGQ = new Parse.Query(gameAdmin);
+			adminGQ.equalTo("userId", this.currentUser.id);
+			await adminGQ.find().then((games) => {
+			for (var i = games.length-1; i >= 0; i--){
+				gameIdsO.push(games[i].get("gameId"));
+			}
+			});
+			for(let i = 0; i < this.currentGames.length; i++)
+			{
+				if(gameIdsR.indexOf( this.currentGames[i].id)!=-1)
+				{
+					this.ratedGames.push(this.currentGames[i]);
+				}
+				if(gameIdsO.indexOf( this.currentGames[i].id)!=-1)
+				{
+					this.createdGames.push(this.currentGames[i]);
+				}
+			}
+			for(let i = 0; i < this.currentConventions.length; i++)
+			{
+				if(conventionIdsO.indexOf( this.currentConventions[i].id)!=-1)
+				{
+					this.createdConventions.push(this.currentConventions[i]);
+				}
+			}
 		}
 	}
 	getCurrentUser()
 	{
 		return this.currentUser;
 	}
-
+	getCreatedGames()
+	{
+		return this.createdGames;
+	}
+	getCreatedConventions()
+	{
+		return this.createdConventions;
+	}
+	getRatedGames()
+	{
+		return this.ratedGames;
+	}
 	saveProfile(newInfo)
 	{
 		const User = Parse.Object.extend('User');
@@ -156,7 +214,6 @@ export class Data {
 				alert(error.code+' Failed to Add Item ' + newConvention.get("name"));
 			}
 		});
-		
 		this.currentConventions = [];
 		const ConventionQ = Parse.Object.extend('Convention');
 		let cquery = new Parse.Query(ConventionQ);
@@ -193,6 +250,28 @@ export class Data {
 				alert("it did not work");
 			}
 		});
+		
+		for(let i = 0; i < this.currentConventions.length; i++)
+		{
+			if(this.currentConventions[i].name == item.name)
+			{
+				const ConventionA = Parse.Object.extend('ConventionAdmin');
+				let newConventionA = new ConventionA();
+				newConventionA.set("conventionId", this.currentConventions[i].id);
+				newConventionA.set("userId",this.currentUser.id);
+				await newConventionA.save(null, {
+				success: function(newConventionA)
+				{
+
+				},
+				error: function(newConventionA, error)
+				{
+					alert(error.code+' Failed to Add Admin');
+				}
+				});
+				this.createdConventions.push(this.currentConventions[i]);
+			}
+		}
 	}
 
 	getConventionData() {
@@ -287,6 +366,28 @@ export class Data {
 				alert("it did not work");
 			}
 		});
+		for(let i = 0; i < this.currentGames.length; i++)
+		{
+			if(this.currentGames[i].title == item.title)
+			{
+				const GameA = Parse.Object.extend('GameAdmin');
+				let newGameA = new GameA();
+				newGameA.set("gameId", this.currentGames[i].id);
+				newGameA.set("userId",this.currentUser.id);
+				await newGameA.save(null, {
+				success: function(newGameA)
+				{
+
+				},
+				error: function(newGameA, error)
+				{
+					alert(error.code+' Failed to Add Admin');
+				}
+				});
+				this.createdGames.push(this.currentGames[i]);
+			}
+		}
+		
 	}
 
 	getGameData() {
@@ -427,6 +528,21 @@ export class Data {
 		});
 		return exists;
 	}
+	getRating(gameId): Number
+	{
+		const Ratings = Parse.Object.extend('Rating');
+		let ratingQ = new Parse.Query(Ratings);
+		ratingQ.equalTo("User", this.currentUser);
+		ratingQ.find().then((ratings) => {
+			for (var i = ratings.length-1; i >= 0; i--){
+				if(ratings[i].get("Game")==gameId)
+				{
+					return ratings[i].get("Rating");
+				}
+			}
+		});
+		return 0;
+	}
 	async addRating(gameId, ratingValue)
 	{
 		const Rating = Parse.Object.extend('Rating');
@@ -488,18 +604,42 @@ export class Data {
 			}
 		}
 		);
-		
+		for(let i = 0; i < this.currentGames.length; i++)
+		{
+			if(this.currentGames[i].id == gameId)
+			{
+				this.ratedGames.push(this.currentGames[i]);
+			}
+		}
 		return avgRate;
 	}
-	/*
-	deleteEntree(items, data)
+	async deleteConvention(convention)
 	{
-		this.allItems.splice(this.allItems.indexOf(data), 1);
-		const Menu = Parse.Object.extend('Menu');
-		this.entreeItems = items;
-		let query = new Parse.Query(Menu);
-		query.equalTo("objectId", data.menuId);
-		query.first({
+		var theConvention;
+		for(let i = 0; i < this.currentConventions.length; i++)
+		{
+			if(this.currentConventions[i].id == convention.id)
+			{
+				theConvention = this.currentConventions[i];
+				break;
+			}
+		}
+		this.currentConventions.splice(this.currentConventions.indexOf(theConvention), 1);
+		
+		for(let i = 0; i < this.createdConventions.length; i++)
+		{
+			if(this.createdConventions[i].id == convention.id)
+			{
+				theConvention = this.createdConventions[i];
+				break;
+			}
+		}
+		this.createdConventions.splice(this.createdConventions.indexOf(theConvention), 1);
+		
+		const ConventionI = Parse.Object.extend('Convention');
+		let query = new Parse.Query(ConventionI);
+		query.equalTo("objectId", convention.id);
+		await query.first({
 		success: function(data){
 			if(data){
 				data.destroy();
@@ -507,8 +647,85 @@ export class Data {
 				return null;
 			}
 		}
-	});
+		});
+		const ConventionA = Parse.Object.extend('ConventionAdmin');
+		let adquery = new Parse.Query(ConventionA);
+		adquery.equalTo("conventionId", convention.id);
+		await adquery.find({
+		success: function(data){
+			if(data){
+				for(var i = data.length-1; i>=0; i--)
+				{
+					data.destroy();
+				}
+			} else {
+				return null;
+			}
+		}
+		});
 	}
-	*/
-	
+	async deleteGame(game)
+	{
+		var theGame;
+		for(let i = 0; i < this.currentGames.length; i++)
+		{
+			if(this.currentGames[i].id == game.id)
+			{
+				theGame = this.currentGames[i];
+				break;
+			}
+		}
+		this.currentGames.splice(this.currentGames.indexOf(theGame), 1);
+		for(let i = 0; i < this.createdGames.length; i++)
+		{
+			if(this.createdGames[i].id == game.id)
+			{
+				theGame = this.createdGames[i];
+				break;
+			}
+		}
+		this.createdGames.splice(this.createdGames.indexOf(theGame), 1);
+		const GameI = Parse.Object.extend('Game');
+		let query = new Parse.Query(GameI);
+		query.equalTo("objectId", game.id);
+		await query.first({
+		success: function(data){
+			if(data){
+				data.destroy();
+			} else {
+				return null;
+			}
+		}
+		});
+		const GameA = Parse.Object.extend('GameAdmin');
+		let adGquery = new Parse.Query(GameA);
+		adGquery.equalTo("gameId", game.id);
+		await adGquery.find({
+		success: function(data){
+			if(data){
+				for(var i = data.length-1; i>=0; i--)
+				{
+					data.destroy();
+				}
+			} else {
+				return null;
+			}
+		}
+		});
+		const GameRatings = Parse.Object.extend('Rating');
+		let delRatingquery = new Parse.Query(GameRatings);
+		delRatingquery.equalTo("Game", game.id);
+		await delRatingquery.find({
+		success: function(data){
+			if(data){
+				for(var i = data.length-1; i>=0; i--)
+				{
+					data.destroy();
+				}
+			} else {
+				return null;
+			}
+		}
+		});
+	}
 }
