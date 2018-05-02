@@ -43,22 +43,22 @@ options: CameraOptions = {
   }
   public doRegister() {
     var user = new Parse.User();
-	console.log(this.password + " " + this.confirm);
-	if(this.password == this.confirm)
-	{
-		let loader = this.loadCtrl.create({
-		content: 'Signing up...'
+	  console.log(this.password + " " + this.confirm);
+	  if(this.password == this.confirm)
+	  {
+		  let loader = this.loadCtrl.create({
+		  content: 'Signing up...'
 		});
-		loader.present();
+		  loader.present();
       user.set("username", this.username);
       user.set("password", this.password);
       user.set("email", this.email);
-	  user.set("platforms",this.platforms);
-	  user.set("likedGenres",this.likedGenres);
-	  user.set("picture",this.picture);
-	  user.set("locationCityState", this.locationCityState);
-	  user.set("zipcode", this.zipcode);
-		var self = this;
+	    user.set("platforms",this.platforms);
+	    user.set("likedGenres",this.likedGenres);
+	    user.set("picture",this.picture);
+	    user.set("locationCityState", this.locationCityState);
+	    user.set("zipcode", this.zipcode);
+		  var self = this;
       user.signUp(null, {
         success: function(user) {
           // Hooray! Let them use the app now.

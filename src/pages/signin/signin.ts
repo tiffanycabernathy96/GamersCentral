@@ -37,14 +37,14 @@ export class SigninPage {
     .catch(e => console.log(e));
 
   }
-  
-  login() {
+
+login() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
-      .then(res => {
+      .then (async res => {
         if(res.status === "connected") {
           this.isLoggedIn = true;
-          this.getUserDetail(res.authResponse.userID);
-
+          await this.getUserDetail(res.authResponse.userID);
+          //this.doFBLogin();
           var user = new Parse.User();
           user.set("username", this.users.email);
           user.set("password", this.users.id);
@@ -54,35 +54,32 @@ export class SigninPage {
 	        user.set("picture", null);
 	        user.set("locationCityState", null);
 	        user.set("zipcode", null);
-
+          var self = this;
           user.signUp(null, {
-            success: function(user){
+            success: function(user) {
               Parse.User.logIn(this.users.email, this.users.id, {  //use id as password. 
                 success: function(user) {
-                  // Do stuff after successful login.
-                  this.navCtrl.setRoot(TabsPage);
+                  self.navCtrl.setRoot(TabsPage);
                 },
                 error: function(user, error) {
-                  // The login failed. Check error to see why.
+                  //alert("Error: " + error.code + " " + error.message);
                 }
               });
             },
-            error: function(user, error) {
-              // Show the error message somewhere and let the user try again.
-              alert("Error: " + error.code + " " + error.message);
+            error: function(user) {
+              //alert("Did not create account.");
+              //alert("Error: " + error.code + " " + error.message);
               //means the users has already signed up, so do login.
-          
-              Parse.User.logIn(this.users.email, this.users.id, {
-                success: function(user) {
-                // Do stuff after successful login.
+              /*Parse.User.login(this.users.email, this.users.id, {
+                success: function(user){
+                  this.navCtrl.setRoot(TabsPage);
                 },
-                error: function(user, error) {
-                // The login failed. Check error to see why.
+                error: function (user, error) {
+          
                 }
-              });
+              });*/
             }
           });
-
         } else {
           this.isLoggedIn = false;
         }
@@ -90,14 +87,15 @@ export class SigninPage {
       .catch(e => console.log('Error logging into Facebook', e));
   }
 
+
   logout() {
     this.fb.logout()
       .then( res => this.isLoggedIn = false)
       .catch(e => console.log('Error logout from Facebook', e));
   }
 
-  getUserDetail(userid) {
-    this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+ async getUserDetail(userid) {
+    await this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
       .then(res => {
         console.log(res);
         this.users = res;
@@ -116,20 +114,20 @@ export class SigninPage {
       content: 'Signing in...'
     });
     loader.present();
-	var self = this;
-	Parse.User.logIn(this.username, this.password, 
-	{
-		success: function(user)
-		{	
-			self.navCtrl.setRoot(TabsPage);
-			self.data.setCurrentUser(user);
-			loader.dismissAll();
-		},
-		error: function(user, error)
-		{
-			loader.dismissAll();
-		}
-	});
+	  var self = this;
+	  Parse.User.logIn(this.username, this.password, 
+	  {
+		  success: function(user)
+		  {	
+			  self.navCtrl.setRoot(TabsPage);
+			  self.data.setCurrentUser(user);
+			  loader.dismissAll();
+		  },
+		  error: function(user, error)
+		  {
+			  loader.dismissAll();
+	  	}
+	  });
   }
 
 }

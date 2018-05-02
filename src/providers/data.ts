@@ -87,19 +87,7 @@ export class Data {
 		return this.currentUser;
 	}
 
-	checkfbUserExist(fbUser){
-		const User = Parse.Object.extend('User');
-		let fbUserInfo = new Parse.Qury(User);
-		fbUserInfo.equalTo("username", fbUser.username);
-		fbUser.first({
-			success: function(fbUser){
-				return true;
-			},
-			error: function(error){
-				return false;
-			}
-		})
-	}
+	
 
 	saveProfile(newInfo)
 	{
