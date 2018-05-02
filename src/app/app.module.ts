@@ -87,7 +87,7 @@ import { Facebook } from '@ionic-native/facebook'
 	Network,
 	Geolocation,
 	HttpClientModule,
-	Facebook, 
+	Facebook,  
 	{provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

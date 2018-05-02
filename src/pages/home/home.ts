@@ -8,6 +8,7 @@ import { ConventionDetailPage } from '../conventionDetail/conventionDetail';
 import { EditGamePage } from '../editGame/editGame';
 import { EditConventionPage } from '../editConvention/editConvention';
 import { LocationSelectPage } from '../location-select/location-select';
+import { Facebook } from '@ionic-native/facebook';
 
 @Component({
   selector: 'page-home',
@@ -21,8 +22,10 @@ export class HomePage {
   public searchInput;
   public convSearchResults = [];
   public gameSearchResults = [];
+
+  isLoggedIn: boolean = true;
   
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data, private fb: Facebook) {
 	this.conventions = this.dataService.getConventionData();
 	this.games = this.dataService.getGameData();
     //this.dataService.getConventionData().then(conventions =>{this.conventions = conventions;});
@@ -40,6 +43,12 @@ export class HomePage {
 
     modal.present();   
 
+}
+
+logout() {
+  this.fb.logout()
+    .then( res => this.isLoggedIn = false)
+    .catch(e => console.log('Error logout from Facebook', e));
 }
 
   delete(item)
