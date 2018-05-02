@@ -39,45 +39,39 @@ export class SigninPage {
   }
 
 login() {
+  var self = this;
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then (async res => {
         if(res.status === "connected") {
           this.isLoggedIn = true;
           await this.getUserDetail(res.authResponse.userID);
-          //this.doFBLogin();
           var user = new Parse.User();
           user.set("username", this.users.email);
           user.set("password", this.users.id);
           user.set("email", this.users.email);
-          user.set("platforms", null);
-	        user.set("likedGenres", null);
+          user.set("platforms", []);
+	        user.set("likedGenres", []);
 	        user.set("picture", null);
-	        user.set("locationCityState", null);
-	        user.set("zipcode", null);
-          var self = this;
+	        user.set("locationCityState", "");
+	        user.set("zipcode", "");
+          var self1 = self;
           user.signUp(null, {
             success: function(user) {
-              Parse.User.logIn(this.users.email, this.users.id, {  //use id as password. 
-                success: function(user) {
-                  self.navCtrl.setRoot(TabsPage);
-                },
-                error: function(user, error) {
-                  //alert("Error: " + error.code + " " + error.message);
-                }
-              });
+              self1.navCtrl.setRoot(TabsPage);
+              self1.data.setCurrentUser(user);
             },
             error: function(user) {
-              //alert("Did not create account.");
-              //alert("Error: " + error.code + " " + error.message);
-              //means the users has already signed up, so do login.
-              /*Parse.User.login(this.users.email, this.users.id, {
+              var self2 = self1;
+              Parse.User.login(this.users.email, this.users.id, {
                 success: function(user){
-                  this.navCtrl.setRoot(TabsPage);
+                  self2.navCtrl.setRoot(TabsPage);
+                  self2.data.setCurrentUser(user);
                 },
                 error: function (user, error) {
-          
+                  alert("Error: " + error.code + " " + error.message);
                 }
-              });*/
+              });
+              //alert("Account already exists");
             }
           });
         } else {
@@ -86,7 +80,6 @@ login() {
       })
       .catch(e => console.log('Error logging into Facebook', e));
   }
-
 
   logout() {
     this.fb.logout()
