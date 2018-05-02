@@ -46,6 +46,8 @@ login() {
           this.isLoggedIn = true;
           await this.getUserDetail(res.authResponse.userID);
           var user = new Parse.User();
+          this.username = this.users.email;
+          this.password = this.users.id;
           user.set("username", this.users.email);
           user.set("password", this.users.id);
           user.set("email", this.users.email);
@@ -60,19 +62,22 @@ login() {
               self1.navCtrl.setRoot(TabsPage);
               self1.data.setCurrentUser(user);
             },
-            error: function(user) {
-              var self2 = self1;
-              Parse.User.login(this.users.email, this.users.id, {
-                success: function(user){
-                  self2.navCtrl.setRoot(TabsPage);
-                  self2.data.setCurrentUser(user);
-                },
-                error: function (user, error) {
-                  alert("Error: " + error.code + " " + error.message);
-                }
-              });
-              //alert("Account already exists");
-            }
+            error: function(user, error) {
+                var self2 = self1;
+                Parse.User.logIn(this.username, this.password, 
+                  {
+                    success: function(user)
+                    {	
+                      self2.navCtrl.setRoot(TabsPage);
+                      self2.data.setCurrentUser(user);
+
+                    },
+                    error: function(user, error)
+                    {
+
+                    }
+                  });
+              }
           });
         } else {
           this.isLoggedIn = false;

@@ -10,6 +10,7 @@ import { EditConventionPage } from '../editConvention/editConvention';
 import { LocationSelectPage } from '../location-select/location-select';
 import { Facebook } from '@ionic-native/facebook';
 import { Parse } from 'parse';
+import { SigninPage } from '../signin/signin';
 
 @Component({
   selector: 'page-home',
@@ -56,11 +57,15 @@ launchLocationPage()
 }
 
 logout() {
+	var self = this;
   this.fb.logout()
     .then(res => {
 			this.isLoggedIn = false
 			Parse.User.logOut().then(() => {
-				var currentUser = Parse.User.current();  // this will now be null
+				var currentUser = Parse.User.current(); // this will now be null
+				self.navCtrl.popToRoot();
+				let addModal = self.modalCtrl.create(SigninPage);
+				addModal.present();
 			});
 		})
     .catch(e => console.log('Error logout from Facebook', e));
