@@ -29,7 +29,10 @@ export class GameDetailPage {
 		
 		this.id = this.navParams.get('item').id;
 		this.steamEmbed = this.navParams.get('item').steamEmbed;
-		this.steamEmbed = this.sanitizer.bypassSecurityTrustResourceUrl(this.steamEmbed);
+		if(this.steamEmbed)
+		{
+			this.steamEmbed = this.sanitizer.bypassSecurityTrustResourceUrl(this.steamEmbed);
+		}
 		this.platforms = this.navParams.get('item').platforms;
 		this.admins = this.navParams.get('item').admins;
 		this.developer = this.navParams.get('item').developer;

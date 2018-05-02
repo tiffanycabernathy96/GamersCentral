@@ -13,20 +13,26 @@ import { EditGamePage } from '../editGame/editGame';
 export class GamesPage {
 
   public allGames = [];
+  public myGames = [];
+  public myRatedGames = [];
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: Data) {
 
 	this.allGames = this.dataService.getGameData();
-	//this.dataService.getGameData().then(games =>{this.allGames = games;});
-
+	this.myGames = this.dataService.getCreatedGames();
+	this.myRatedGames = this.dataService.getRatedGames();
   }
-  delete(item)
+  deleteGame(item)
   {
-
+		this.dataService.deleteGame(item);
+		this.allGames = this.dataService.getGameData();
+		this.myGames = this.dataService.getCreatedGames();
+		this.myRatedGames = this.dataService.getRatedGames();
   }
   ionViewWillEnter()
   {
 	this.allGames = this.dataService.getGameData();
-	 //this.dataService.getGameData().then(games =>{this.allGames = games;});
+	this.myGames = this.dataService.getCreatedGames();
+	this.myRatedGames = this.dataService.getRatedGames();
   }
   addGame() {
       let addModal = this.modalCtrl.create(AddGamePage);
@@ -34,7 +40,7 @@ export class GamesPage {
         if (item) {
 			this.dataService.addGame(item);
 			this.allGames.push(item);
-			//this.dataService.getGameData().then(games =>{this.allGames = games;});
+			this.myGames.push(item);
 			this.allGames = this.dataService.getGameData();
         }
       });
@@ -45,7 +51,6 @@ export class GamesPage {
   {  
     let addModal = this.modalCtrl.create(EditGamePage, {item: item});
 	addModal.onDidDismiss( ()=> {
-		//this.dataService.getGameData().then(games =>{this.allGames = games;});
 		this.allGames = this.dataService.getGameData();
     });
     addModal.present();

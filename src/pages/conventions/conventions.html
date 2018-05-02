@@ -9,10 +9,35 @@
 </ion-header>
 
 <ion-content padding class="content"> 
+
+	<ion-card *ngIf="myConventions.length >0">
+		<ion-card-header style="color: #ffffff">
+			Created Conventions
+		</ion-card-header>
+      <ion-card-content>
+          <ion-list>
+            <ion-item-sliding *ngFor="let item of myConventions">
+              <ion-item (click)="viewItem(item)">
+                  <ion-thumbnail item-start>
+                      <img *ngIf="item.iconLogo" height="15" width="15" [src]="item.iconLogo" />
+                  </ion-thumbnail>
+                  <h2 style="color: #ffffff">{{item.name}}</h2>
+                  <p>Location: {{item.locationCityState}}, {{item.zipcode}}</p>
+                  <p>Main Page: {{item.mainPage}}</p>
+                </ion-item>
+                  <ion-item-options side="right">
+                      <button ion-button (click)="loadEditConvention(item)" color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
+                      <button ion-button color="danger" (click)="deleteConvention(item)"><ion-icon name="trash"></ion-icon>Delete</button>
+                  </ion-item-options>
+            </ion-item-sliding> 
+          </ion-list>
+      </ion-card-content>
+    </ion-card>
+	
   <ion-card>
-      <ion-card-header style="color: #ffffff">
-        Upcoming Conventions
-      </ion-card-header>
+		<ion-card-header style="color: #ffffff">
+			All Conventions
+		</ion-card-header>
       <ion-card-content>
           <ion-list>
             <ion-item-sliding *ngFor="let item of allConventions">
@@ -26,7 +51,7 @@
                 </ion-item>
                   <ion-item-options side="right">
                       <button ion-button (click)="loadEditConvention(item)" color="editGreen"><ion-icon name="create"></ion-icon>Edit</button>
-                      <button ion-button color="danger" disabled=true;><ion-icon name="trash"></ion-icon>Delete</button>
+                      <button ion-button color="danger" (click)="deleteConvention(item)"><ion-icon name="trash"></ion-icon>Delete</button>
                   </ion-item-options>
             </ion-item-sliding> 
           </ion-list>
