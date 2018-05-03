@@ -147,6 +147,18 @@ export class Data {
 	}
 	saveProfile(newInfo)
 	{
+		this.currentUser.set('username', newInfo.username);
+		this.currentUser.set('password', newInfo.password);
+		this.currentUser.set('email', newInfo.email);
+		this.currentUser.set('facebook', newInfo.facebook);
+		this.currentUser.set('instagram', newInfo.instagram);
+		this.currentUser.set('twitter', newInfo.twitter);
+		this.currentUser.set('picture', newInfo.picture);
+		this.currentUser.set('likedGenres', newInfo.likedGenres);
+		this.currentUser.set('platforms', newInfo.platforms);
+		this.currentUser.set('locationCityState', newInfo.locationCityState);
+		this.currentUser.set('zipcode', newInfo.zipcode);
+		
 		const User = Parse.Object.extend('User');
 		let userInfo = new Parse.Query(User);
 		userInfo.equalTo("objectId", newInfo.id);

@@ -69,7 +69,7 @@ export class EditProfilePage {
 		zipcode: this.zipcode
     };
 		this.dataService.saveProfile(newProfile);
-		this.view.dismiss();
+		this.view.dismiss(newProfile);
   }
 
   close() {
